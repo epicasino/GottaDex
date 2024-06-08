@@ -1,0 +1,11 @@
+gens for:
+sword & shield: gen VIII(8) https://pokeapi.co/api/v2/pokedex/27/, 
+brilliant diamond & shining pearl gen VIII (8) https://pokeapi.co/api/v2/pokedex/6/ (EXTENDED SINNOH),
+arceus: gen VIII (8) https://pokeapi.co/api/v2/pokedex/30/,
+scarlet & violet: gen IX (9) https://pokeapi.co/api/v2/pokedex/31/,
+
+to find if a pokemon is in these games, query the pokedexes and find if the pokemon is in there
+^ NOTE: you could query the pokedexes upon initial page load, so the API isn't constantly being fetched (maybe)
+
+if pokemon is in pokedex:
+  display that the pokemon is in the game
