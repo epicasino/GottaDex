@@ -1,11 +1,437 @@
 gens for:
 sword & shield: gen VIII(8) https://pokeapi.co/api/v2/pokedex/27/, 
+sword & shield isle of armor: https://pokeapi.co/api/v2/pokedex/28/
+sword & shield crown tundra: https://pokeapi.co/api/v2/pokedex/29/
 brilliant diamond & shining pearl gen VIII (8) https://pokeapi.co/api/v2/pokedex/6/ (EXTENDED SINNOH),
 arceus: gen VIII (8) https://pokeapi.co/api/v2/pokedex/30/,
 scarlet & violet: gen IX (9) https://pokeapi.co/api/v2/pokedex/31/,
+scarlet & violet kitakami: https://pokeapi.co/api/v2/pokedex/32/
+scarlet & violet blueberry: https://pokeapi.co/api/v2/pokedex/33/
+
+national: https://pokeapi.co/api/v2/pokedex/1/
+
+all entries in pokeapi: 1302
 
 to find if a pokemon is in these games, query the pokedexes and find if the pokemon is in there
 ^ NOTE: you could query the pokedexes upon initial page load, so the API isn't constantly being fetched (maybe)
+^ IMPROVEMENT (maybe): upon user registration, create the pokedex upon account creation into their database entry using the PokeAPI.
 
 if pokemon is in pokedex:
   display that the pokemon is in the game
+
+User schema:
+_id: ID
+username: String!
+password: String!
+pokedex: Pokedex schema
+
+Pokedex schema:
+progress: Int
+pokemon: [Pokemon]
+
+Pokemon schema:
+pokemonName: String!
+sprite: String!
+femaleSprite: String
+pokedexNum: Int!
+perfectIV: Bool!
+hiddenAbility: String
+nature: String # dropdown with natures in front-end
+genderDifference: Bool!
+pokemonLocation: PokemonLocation
+evSpread: EvSpread 
+forms: [Forms]
+
+PokemonLocation schema:
+swordShield: Bool!
+swordShieldIsle: Bool!
+swordShieldCrown: Bool!
+diamondPearl: Bool!
+arceus: Bool!
+scarletViolet: Bool!
+scarletVioletKita: Bool!
+scarletVioletBlue: Bool!
+
+EvSpread schema:
+NOTE: each stat can have 0-252, but only a max of 508 EV points in total.
+hp: Int
+attack: Int
+defense: Int
+spAtk: Int
+spDef: Int
+speed: Int
+
+Forms schema: NOTE -> probably just do a regex to filter out unwarranted entries for pokemon forms. minior, for example, has multiple forms but the meteor colors aren't needed. mimikyu has multiple forms depending if disguise is broken. meowth & gengar has gmax and mega variants. those are not needed. (https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_with_form_differences)
+formName: String!
+sprite: String!
+perfectIV: Bool!
+hiddenAbility: String
+
+
+pseudocode to create a static json with preset pokemon info:
+import nationDexEntries.json
+
+wrap entire thing into one async function
+let pokeDex = []
+THEN
+in property "pokemon_entries" of nationalDexEntries.json, loop over array:
+  const pokemonSpecies = await fetch(pokemon_entries[i].pokemon_species.url)
+  const pokemonInfo = await fetch(pokemonSpecies.varieties[0].pokemon.url)
+  
+  let pokemon = {
+    pokemonName: pokemonSpecies.name,
+    pokedexNum: pokemonSpecies.id,
+    sprite: pokemonInfo.sprites.front_default,
+    femaleSprite: pokemonInfo.sprites.front_female || 'N/A',
+    perfectIV: false,
+    hiddenAbility,
+    nature = ''
+    genderDifference: pokemonSpecies.has_gender_differences
+    pokemonLocation: {
+      swordShield,
+      swordShieldCrown,
+      swordShieldIsle,
+      diamondPearl,
+      arceus,
+      scarletViolet,
+      scarletVioletKita,
+      scarletVioletBlue,
+    },
+    evSpread: {
+      hp: 0
+      attack: 0
+      defense: 0
+      spAtk: 0
+      spDef: 0
+      speed: 0
+    },
+    forms: []
+  }
+
+  for each ability in pokemonInfo.abilities {
+    if pokemonInfo.abilities[i].is_hidden {
+      pokemon.hiddenAbility = pokemonInfo.abilities[i].ability.name
+    }
+  }
+
+  for each index in pokemonSpecies.pokedex_numbers, loop {
+    pokemonSpecies.pokedex_numbers[i].pokedex.name === 'extended-sinnoh' && pokemon.pokemonLocation.diamondPearl = true
+    pokemonSpecies.pokedex_numbers[i].pokedex.name === 'galar' && pokemon.pokemonLocation.swordShield = true
+    pokemonSpecies.pokedex_numbers[i].pokedex.name === 'isle-of-armor' && pokemon.pokemonLocation.swordShieldIsle = true
+    pokemonSpecies.pokedex_numbers[i].pokedex.name === 'crown-tundra' && pokemon.pokemonLocation.swordShieldCrown = true
+    pokemonSpecies.pokedex_numbers[i].pokedex.name === 'hisui' && pokemon.pokemonLocation.arceus = true
+    pokemonSpecies.pokedex_numbers[i].pokedex.name === 'paldea' && pokemon.pokemonLocation.scarletViolet = true
+    pokemonSpecies.pokedex_numbers[i].pokedex.name === 'kitakami' && pokemon.pokemonLocation.scarletVioletKita = true
+    pokemonSpecies.pokedex_numbers[i].pokedex.name === 'blueberry' && pokemon.pokemonLocation.scarletVioletBlue = true
+  }
+
+  if pokemonSpecies.varieties.length > 1 {
+    SPECIAL CASE FOR MINIOR:
+    if pokemon.pokemonName === 'minior' {
+      loop start at index 7 for array of varieties:
+        const formInfo = await fetch(pokemonSpecies.varieties[i].pokemon.url)
+
+        let form = {
+          formName: formInfo.name
+          sprite: formInfo.sprites.front_default
+          perfectIV: false
+        }
+
+        pokemon.forms.push(form)
+    } else {
+      const regex = /gmax|mega|rock-star|belle|pop-star|pdh|libre|cosplay|original-cap|hoenn-cap|sinnoh-cap|unova-cap|kalos-cap|alola-cap|partner-cap|starter|world-cap|primal|deoxys-attack|deoxys-defense|deoxys-speed|origin|shaymin-sky|darmanitan-zen|darmanitan-galar-zen|therian|kyurem-black|kyurem-white|keldeo-resolute|meloetta-pirouette|battle-bond|greninja-ash|floette-eternal|aegislash-blade|10-power-construct|50-power-construct|zygarde-complete|zygarde-10|hoopa-unbound|wishiwashi-school|busted|totem-disguised|totem-busted|necrozma-dusk|necrozma-dawn|necrozma-ultra|gulping|gorging|eiscue-noice|morpeko-hangry|zacian-crowned|zamazenta-crowned|eternamax|calyrex-ice|calyrex-shadow|palafin-hero|gimmighoul-roaming|ogerpon-wellspring-mask|ogerpon-hearthflame-mask|ogerpon-cornerstone-mask|terastal|stellar/gm
+
+      loop starts at index 1 for array of varieties (always skip 0, default form)
+      if !regex.match(pokemonSpecies.varieties[i].pokemon.name) {
+        SPECIAL CASE FOR SQUAWKABILLY: GREEN & BLUE PLUMAGE DIFF HIDDEN ABILITIES
+        if pokemon.name === 'squawkabilly' {
+          const formInfo = await fetch(pokemonSpecies.varieties[i].pokemon.url)
+          let form = {
+            formName: formInfo.name,
+            sprite: formInfo.sprites.front_default,
+            hiddenAbility
+            perfectIV: false,
+          }
+
+          for each ability in formInfo.abilities {
+            if formInfo.abilities[i].is_hidden {
+              form.hiddenAbility = formInfo.abilities[i].ability.name
+            }
+          }
+          pokemon.forms.push(form)
+          
+        } else {
+          const formInfo = await fetch(pokemonSpecies.varieties[i].pokemon.url)
+
+          let form = {
+            formName: formInfo.name
+            sprite: formInfo.sprites.front_default
+            perfectIV: false
+          }
+
+          pokemon.forms.push(form)
+        }
+      }
+
+      return
+    }
+  }
+
+  SPECIAL CASE FOR UNOWN, BURMY, SHELLOS, GASTRODON, DEERLING, ETC
+  if /unown|burmy|shellos|gastrodon|deerling|sawsbuck|vivillon|flabebe|floette|florges|sinistea|polteageist|alcremie|poltchageist|sinistcha/gm.match(pokemon.pokemonName) {
+      const specificPokeInfo = await fetch(pokemonSpecies.varieties[0].pokemon.url)
+      for loop for specificPokeInfo.forms, start at index 1 {
+        const formInfo = await fetch(specificPokeInfo.forms[i].url)
+
+        let form = {
+          formName: formInfo.name
+          sprite: formInfo.sprites.front_default
+          perfectIV: false
+        }
+        pokemon.forms.push(form)
+      }
+  }
+
+  
+  
+
+
+
+POKEMON WITH FORM DIFFERENCES: EXCLUDE ALL GMAX OR MEGA
+
+Pikachu: ✔
+exclude all pikachu except regular pikachu
+
+Pichu: ✔
+default only.
+
+Tauros: ✔
+(Specific to Paldean Tauros, All forms)
+
+Unown: ✔
+All forms.
+
+Castform: ✔
+All forms.
+
+Kyogre: ✔
+Only normal.
+
+Groudon: ✔
+Only normal.
+
+Deoxys: ✔
+Only normal.
+
+Burmy: ✔
+All forms
+
+Wormadam: ✔
+All forms
+
+Cherrim: ✔
+Only default.
+
+Shellos: ✔
+all forms.
+
+Gastrodon: ✔
+all forms.
+
+Rotom: ✔
+all forms.
+
+Dialga: ✔
+default.
+
+Palkia: ✔
+default.
+
+Giratina: ✔
+default.
+
+Shaymin: ✔
+default.
+
+Arceus: ✔
+default.
+
+Basculin: ✔
+All forms.
+
+Basculegion: ✔
+Both male and female versions.
+
+Darmanitan: ✔
+Standard Mode for regular and galarian form only.
+
+Deerling: ✔
+All forms.
+
+Sawsbuck: ✔
+All forms.
+
+Tornadus: ✔
+default.
+
+Thundurus: ✔
+default.
+
+Landorus: ✔
+default.
+
+Enamorus: ✔
+default.
+
+Kyurem: ✔
+default
+
+Keldeo: ✔
+default
+
+Meloetta: ✔
+default
+
+Genesect: ✔
+only default.
+
+Greninja: ✔
+default.
+
+Vivillon: ✔
+all types.
+
+Flabebe: ✔
+all types.
+
+Floette: ✔
+all types.
+
+Florges: ✔
+all types.
+
+Furfrou: ✔
+default only.
+
+Meowstic: ✔
+both male and female types.
+
+Aegislash: ✔
+default.
+
+Pumpkaboo: ✔
+all types.
+
+Gourgeist: ✔
+all types.
+
+Xerneas: ✔
+only default.
+
+Zygarde: ✔
+only default.
+
+Hoopa: ✔
+only default.
+
+Oricorio: ✔
+all types.
+
+Lycanroc: ✔
+all types.
+
+Wishiwashi: ✔
+default
+
+Silvally: ✔
+only default.
+
+Minior: ✔
+dont need to do meteor form, but the cores are needed.
+
+Mimikyu: ✔
+only default.
+
+Necrozma: ✔ 
+only default.
+
+Magearna: ✔ 
+all types.
+
+Cramorant: ✔ 
+only default.
+
+Toxtricity: ✔ 
+Amped and Low Key Form only.
+
+Sinistea: ✔ 
+all types.
+
+Polteageist: ✔ 
+all types.
+
+Alcremie: ✔ 
+all types EXCEPT gmax.
+
+Eiscue: ✔
+only default.
+
+Indeedee: ✔
+both male and female forms.
+
+Morpeko: ✔
+only default.
+
+Zacian: ✔
+only default.
+
+Zamazenta: ✔
+only default.
+
+Eternatus: ✔
+only default.
+
+Urshifu: ✔
+both forms ecxept gmax
+
+Zarude: ✔
+both forms.
+
+Calyrex: ✔
+default.
+
+Ursaluna: ✔
+both forms.
+
+Oinkologne: ✔
+male and female.
+
+Maushold: ✔
+both forms.
+
+Squawkabilly: ✔
+all forms. (Green and Blue Plumage have different Hidden Abilities from Yellow and White Plumage.)
+
+Palafin: ✔
+default.
+
+Tatsugiri: ✔
+all forms.
+
+Dudunsparce: ✔
+all forms.
+
+Gimmighoul: ✔
+chest form only.
+
+Poltchageist: ✔
+all forms.
+
+Sinistcha: ✔
+all forms.
+
+Ogerpon: ✔
+default.
+
+terapagos: ✔
+default.
