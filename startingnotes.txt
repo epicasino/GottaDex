@@ -132,8 +132,8 @@ in property "pokemon_entries" of nationalDexEntries.json, loop over array:
         const formInfo = await fetch(pokemonSpecies.varieties[i].pokemon.url)
 
         let form = {
-          formName: formInfo.name
-          sprite: formInfo.sprites.front_default
+          formName: formInfo.name,
+          sprite: formInfo.sprites.front_default,
           perfectIV: false
         }
 

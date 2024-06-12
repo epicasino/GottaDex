@@ -15,6 +15,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "watch": "nodemon server.js"
+    "watch": "nodemon server.js",
+    "updateDex": "node ./utils/pokemonInfo.js"
   }
 }
