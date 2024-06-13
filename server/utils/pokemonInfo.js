@@ -165,6 +165,7 @@ const createPokedex = async () => {
       }
     }
     // SPECIAL CASE FOR UNOWN, BURMY, SHELLOS, GASTRODON, DEERLING, ETC
+    // IVE FOUND FOR SINISTEA, POLTEAGEIST, ALCREMIE, POLTCHAGEIST, SINISTCHA THAT ALL FORMS INCLUDED IN THEM DO NOT HAVE UNIQUE SPRITES. POKEDEX.JSON IS MODIFIED TO FIX THAT, BUT FIX CODE ACCORDING TO THIS INFO.
     if (
       /unown|burmy|shellos|gastrodon|deerling|sawsbuck|vivillon|flabebe|floette|florges|sinistea|polteageist|alcremie|poltchageist|sinistcha/.test(
         pokemon.pokemonName

@@ -23,9 +23,6 @@ User schema:
 _id: ID
 username: String!
 password: String!
-pokedex: Pokedex schema
-
-Pokedex schema:
 progress: Int
 pokemon: [Pokemon]
 
