@@ -63,7 +63,7 @@ const resolvers = {
         pokemon: pokedexJSON,
       });
 
-      console.log(user);
+      // console.log(user);
 
       const token = signToken(user);
 
