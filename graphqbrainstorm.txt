@@ -1,0 +1,186 @@
+query QueryUser($username: String, $userId: String) {
+  user(username: $username, userId: $userId) {
+    _id
+    username
+    password
+    progress
+    pokemon {
+      pokemonName
+      pokedexNum
+      sprite
+      female
+      genderDifference
+      perfectIV
+      hiddenAbility
+      nature
+      pokemonLocation {
+        swordShield
+        swordShieldIsle
+        swordShieldCrown
+        diamondPearl
+        arceus
+        scarletViolet
+        scarletVioletKita
+        scarletVioletBlue
+      }
+      evSpread {
+        hp
+        attack
+        defense
+        spAtk
+        spDef
+        speed
+      }
+      forms {
+        formName
+        sprite
+        perfectIV
+        hiddenAbility
+      }
+    }
+  }
+}
+
+query QueryPokemon($userId: String, $pokedexNum: Int) {
+  pokemon(userId: $userId, pokedexNum: $pokedexNum) {
+    pokemonName
+    pokedexNum
+    sprite
+    female
+    genderDifference
+    perfectIV
+    hiddenAbility
+    nature
+    pokemonLocation {
+      swordShield
+      swordShieldIsle
+      swordShieldCrown
+      diamondPearl
+      arceus
+      scarletViolet
+      scarletVioletKita
+      scarletVioletBlue
+    }
+    evSpread {
+      hp
+      attack
+      defense
+      spAtk
+      spDef
+      speed
+    }
+    forms {
+      formName
+      sprite
+      perfectIV
+      hiddenAbility
+    }
+  }
+}
+
+mutation Register($username: String!, $password: String!) {
+  register(username: $username, password: $password) {
+    token
+    user {
+      _id
+      username
+      password
+      progress
+      pokemon {
+        pokemonName
+        pokedexNum
+        sprite
+        female
+        genderDifference
+        perfectIV
+        hiddenAbility
+        nature
+        pokemonLocation {
+          swordShield
+          swordShieldIsle
+          swordShieldCrown
+          diamondPearl
+          arceus
+          scarletViolet
+          scarletVioletKita
+          scarletVioletBlue
+        }
+        evSpread {
+          hp
+          attack
+          defense
+          spAtk
+          spDef
+          speed
+        }
+        forms {
+          formName
+          sprite
+          perfectIV
+          hiddenAbility
+        }
+      }
+    }
+  }
+}
+
+mutation Login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    token
+    user {
+      _id
+      username
+      progress
+    }
+  }
+}
+
+mutation UpdatePokedex($pokedex: PokemonInput) {
+  updatePokedex(pokedex: $pokedex) {
+    pokemonName
+    pokedexNum
+    sprite
+    female
+    genderDifference
+    perfectIV
+    hiddenAbility
+    nature
+    evSpread {
+      hp
+      attack
+      defense
+      spAtk
+      spDef
+      speed
+    }
+    forms {
+      formName
+      sprite
+      perfectIV
+      hiddenAbility
+    }
+    pokemonLocation {
+      swordShield
+      swordShieldIsle
+      swordShieldCrown
+      diamondPearl
+      arceus
+      scarletViolet
+      scarletVioletKita
+      scarletVioletBlue
+    }
+  }
+}
+
+mutation UpdatePokedexForm($pokedex: PokemonInput) {
+  updatePokemonForm(pokedex: $pokedex) {
+    pokemonName
+    pokedexNum
+    forms {
+      formName
+      sprite
+      perfectIV
+      hiddenAbility
+    }
+  }
+}
