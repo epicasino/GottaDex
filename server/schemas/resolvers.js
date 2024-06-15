@@ -16,7 +16,7 @@ const resolvers = {
     },
     user: async (parent, { username, userId }, context) => {
       if (userId) {
-        return await User.findById(userId);
+        return await User.findOne(userId);
       }
       if (username) {
         return await User.findOne({ username });
