@@ -47,7 +47,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <Navbar setLoginBtn={setLoginBtn} />
-      {loginBtn && <Login />}
+      {loginBtn && <Login setLoginBtn={setLoginBtn} />}
       {Auth.loggedIn() ? <Dashboard /> : <Info />}
     </ApolloProvider>
   );
