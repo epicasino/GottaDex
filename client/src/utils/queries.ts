@@ -10,7 +10,7 @@ export const QUERY_ME = gql`
         pokemonName
         pokedexNum
         sprite
-        female
+        femaleSprite
         genderDifference
         perfectIV
         hiddenAbility
@@ -55,7 +55,7 @@ export const QUERY_USER = gql`
         pokemonName
         pokedexNum
         sprite
-        female
+        femaleSprite
         genderDifference
         perfectIV
         hiddenAbility
@@ -95,7 +95,7 @@ export const QUERY_POKEMON = gql`
       pokemonName
       pokedexNum
       sprite
-      female
+      femaleSprite
       genderDifference
       perfectIV
       hiddenAbility

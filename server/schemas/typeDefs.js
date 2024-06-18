@@ -10,7 +10,7 @@ const typeDefs = `
     pokemonName: String!
     pokedexNum: Int!
     sprite: String!
-    female: String
+    femaleSprite: String
     genderDifference: Boolean!
     perfectIV: Boolean!
     hiddenAbility: String

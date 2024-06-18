@@ -42,7 +42,8 @@ class AuthService {
   login(idToken: string) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/dashboard');
+    // this will reload the page and reset the state of the application back to home
+    window.location.assign('/');
   }
 
   logout() {

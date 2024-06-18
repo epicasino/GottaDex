@@ -1,4 +1,3 @@
-import { MouseEvent } from 'react';
 import { useState } from 'react';
 import Register from './Register';
 
@@ -87,8 +86,8 @@ function Login({
 
   return (
     <div
-      onClick={(event: MouseEvent) => {
-        event.target === event.currentTarget && setLoginBtn(false);
+      onClick={(e) => {
+        e.target === e.currentTarget && setLoginBtn(false);
       }}
       className="bg-zinc-950/75 absolute h-screen w-full flex justify-center items-center"
     >

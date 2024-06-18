@@ -6,7 +6,7 @@ function Navbar({
   setLoginBtn: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
-    <nav className="top-0 h-[5vh] w-full flex justify-between items-center px-3 z-50 bg-zinc-900">
+    <nav className="fixed top-0 h-[5vh] w-full flex justify-between items-center px-3 z-50 bg-zinc-900">
       <div className="flex flex-row gap-2 items-center">
         <img src="pokeball.svg" className="h-[1.5rem] w-auto invert"></img>
         <p className="navbar-hover-interact">GottaDex</p>
