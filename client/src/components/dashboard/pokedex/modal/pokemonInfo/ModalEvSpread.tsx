@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import { iEvSpread } from '../../../types';
 
-function PokedexModalEvSpread({
+export default function ModalEvSpread({
   pokemonEv,
   setPokemonEv,
 }: {
@@ -92,8 +92,6 @@ function PokedexModalEvSpread({
     </div>
   );
 }
-
-export default PokedexModalEvSpread;
 
 // hp: Int;
 // attack: Int;

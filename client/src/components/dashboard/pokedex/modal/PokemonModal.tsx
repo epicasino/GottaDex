@@ -1,9 +1,9 @@
-import { PokedexModalSprites } from './pokemonInfo/ModalSprites';
 import { Dispatch, useState } from 'react';
 import { iPokemon } from '../../types';
-import PokedexModalEvSpread from './pokemonInfo/ModalEvSpread';
-import PokedexModalNature from './pokemonInfo/ModalNature';
-import PokemonModalHidden from './pokemonInfo/ModalHidden';
+import ModalSprites from './pokemonInfo/ModalSprites';
+import ModalEvSpread from './pokemonInfo/ModalEvSpread';
+import ModalNature from './pokemonInfo/ModalNature';
+import ModalHidden from './pokemonInfo/ModalHidden';
 
 function PokemonModal({
   setShowModal,
@@ -35,21 +35,19 @@ function PokemonModal({
         </header>
         <section>
           {/* pokemon's sprite(s) */}
-          <PokedexModalSprites selectedPokemonInfo={selectedPokemonInfo} />
+          <ModalSprites selectedPokemonInfo={selectedPokemonInfo} />
           {/* hidden ability */}
-          <PokemonModalHidden selectedPokemonInfo={selectedPokemonInfo} />
+          <ModalHidden selectedPokemonInfo={selectedPokemonInfo} />
         </section>
         <form className="flex flex-col">
-          {/* Nature Dropdown */}
-          <PokedexModalNature
+          {/* nature Dropdown */}
+          <ModalNature
             pokemonNature={pokemonNature}
             setPokemonNature={setPokemonNature}
           />
           {/* evSpread */}
-          <PokedexModalEvSpread
-            pokemonEv={pokemonEv}
-            setPokemonEv={setPokemonEv}
-          />
+          <ModalEvSpread pokemonEv={pokemonEv} setPokemonEv={setPokemonEv} />
+          {/* forms */}
         </form>
       </article>
     </div>

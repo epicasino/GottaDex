@@ -1,6 +1,6 @@
 import { iPokemon } from '../../../types';
 
-function PokemonModalHidden({
+export default function ModalHidden({
   selectedPokemonInfo,
 }: {
   selectedPokemonInfo: iPokemon;
@@ -16,5 +16,3 @@ function PokemonModalHidden({
     </p>
   );
 }
-
-export default PokemonModalHidden;

@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import natures from '../../../../../utils/json/natures.json';
 
-function PokedexModalNature({
+export default function ModalNature({
   pokemonNature,
   setPokemonNature,
 }: {
@@ -37,5 +37,3 @@ function PokedexModalNature({
     </div>
   );
 }
-
-export default PokedexModalNature;

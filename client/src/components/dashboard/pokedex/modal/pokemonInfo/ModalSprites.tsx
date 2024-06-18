@@ -1,5 +1,6 @@
 import { iPokemon } from '../../../types';
-export function PokedexModalSprites({
+
+export default function ModalSprites({
   selectedPokemonInfo,
 }: {
   selectedPokemonInfo: iPokemon;
