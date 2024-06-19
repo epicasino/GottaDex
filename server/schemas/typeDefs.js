@@ -25,7 +25,7 @@ const typeDefs = `
     nature: String
     perfectIV: Boolean
     evSpread: EvSpreadInput
-    form: [FormInput]
+    forms: [FormInput]
   }
   type PokemonLocation {
     swordShield: Boolean!
@@ -62,6 +62,8 @@ const typeDefs = `
   input FormInput {
     formName: String
     perfectIV: Boolean
+    sprite: String
+    hiddenAbility: String
   }
   type Auth {
     token: ID!
@@ -77,7 +79,6 @@ const typeDefs = `
     register(username: String!, password: String!): Auth
     removeUser(userId: String!): User
     updatePokedex(pokedex: PokemonInput): Pokemon
-    updatePokemonForm(pokedex: PokemonInput): Pokemon
   }
 `;
 

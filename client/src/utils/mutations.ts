@@ -41,15 +41,6 @@ export const UPDATE_POKEDEX = gql`
         spDef
         speed
       }
-    }
-  }
-`;
-
-export const UPDATE_POKEMON_FORM = gql`
-  mutation UpdatePokedexForm($pokedex: PokemonInput) {
-    updatePokemonForm(pokedex: $pokedex) {
-      pokemonName
-      pokedexNum
       forms {
         formName
         sprite

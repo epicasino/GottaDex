@@ -16,7 +16,7 @@ export interface iPokemon {
   nature: string;
   pokemonLocation: iPokemonLocation;
   evSpread: iEvSpread;
-  forms: [iPokemonForms];
+  forms: Array<iPokemonForms>;
 }
 
 export interface iPokemonLocation {

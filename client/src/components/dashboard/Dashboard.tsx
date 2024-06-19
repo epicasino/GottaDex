@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { iUserDataDash } from './types';
 import PokedexContainer from './pokedex/PokedexContainer';
 import PokemonModal from './pokedex/modal/PokemonModal';
@@ -13,6 +13,13 @@ function Dashboard() {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(0);
+
+  // Locks user scrolling in dashboard when modal is showing
+  useEffect(() => {
+    showModal
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'unset');
+  }, [showModal]);
 
   // console.log(userData);
   return (
