@@ -17,7 +17,7 @@ function PokemonCard({
 
   return (
     <div
-      className={`w-32 h-32 flex flex-col items-center justify-center rounded-md transition ${
+      className={`w-48 h-48 flex flex-col items-center justify-center rounded-md transition ${
         pokemon.perfectIV && pokemon.forms.length === 0
           ? 'bg-yellow-400 hover:bg-yellow-500/50'
           : pokemon.perfectIV && pokemon.forms.every((form) => form.perfectIV)
