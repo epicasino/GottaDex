@@ -17,7 +17,15 @@ function PokemonCard({
 
   return (
     <div
-      className="w-32 h-32 bg-zinc-800 flex flex-col items-center justify-center rounded-md transition hover:bg-zinc-700/50"
+      className={`w-32 h-32 flex flex-col items-center justify-center rounded-md transition ${
+        pokemon.perfectIV && pokemon.forms.length === 0
+          ? 'bg-yellow-400 hover:bg-yellow-500/50'
+          : pokemon.perfectIV && pokemon.forms.every((form) => form.perfectIV)
+          ? 'bg-yellow-400 hover:bg-yellow-500/50'
+          : pokemon.perfectIV && !pokemon.forms.every((form) => form.perfectIV)
+          ? 'bg-green-600 hover:bg-green-700/50'
+          : 'bg-zinc-800 hover:bg-zinc-700/50'
+      }`}
       onClick={handleCardClick}
     >
       <h5 className="tinyFont text-zinc-50">

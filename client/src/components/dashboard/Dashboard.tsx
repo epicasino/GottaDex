@@ -7,12 +7,13 @@ import PokemonModal from './pokedex/modal/PokemonModal';
 
 function Dashboard() {
   // { fetchPolicy: 'network-only' }
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data, refetch } = useQuery(QUERY_ME);
 
   const userData: iUserDataDash = data?.me;
 
   const [showModal, setShowModal] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(0);
+  const [refetched, setRefetched] = useState(false);
 
   // Locks user scrolling in dashboard when modal is showing
   useEffect(() => {
@@ -21,7 +22,22 @@ function Dashboard() {
       : (document.body.style.overflow = 'unset');
   }, [showModal]);
 
-  // console.log(userData);
+  useEffect(() => {
+    // console.log(refetched);
+    if (!showModal) {
+      if (!refetched) {
+        refetch();
+        // console.log('refetched');
+        return setRefetched(true);
+      }
+    }
+    if (showModal) {
+      if (refetched) {
+        return setRefetched(false);
+      }
+    }
+  }, [showModal, refetched, refetch]);
+
   return (
     <main className="min-h-screen min-w-screen bg-zinc-950 flex flex-col items-center">
       {loading ? (
