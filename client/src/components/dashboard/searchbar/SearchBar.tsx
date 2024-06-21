@@ -19,15 +19,30 @@ export default function SearchBar({
       // console.log('Searchbar Empty')
       setPokemonList(pokemon);
     } else {
-      // console.log(searchItem);
-      const searchNames = pokemon.filter((pokemonEntry) => {
-        if (pokemonEntry.pokemonName.includes(searchItem.toLowerCase())) {
-          return true;
-        } else return false;
-      });
+      // if the search item cannot be parsed into a number, run this
+      if (!parseInt(searchItem)) {
+        // console.log(searchItem);
+        const searchNames = pokemon.filter((pokemonEntry) => {
+          if (pokemonEntry.pokemonName.includes(searchItem.toLowerCase())) {
+            return true;
+          } else return false;
+        });
 
-      // console.log(searchNames);
-      setPokemonList(searchNames);
+        // console.log(searchNames);
+        setPokemonList(searchNames);
+        // if the search item is a number
+      } else {
+        const searchNames = pokemon.filter((pokemonEntry) => {
+          if (
+            pokemonEntry.pokedexNum.toString().includes(searchItem.toString())
+          ) {
+            return true;
+          } else return false;
+        });
+
+        // console.log(searchNames);
+        setPokemonList(searchNames);
+      }
     }
   }, [searchItem, pokemon, setPokemonList]);
 
