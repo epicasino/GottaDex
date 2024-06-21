@@ -16,7 +16,7 @@ const resolvers = {
     },
     user: async (parent, { username, userId }, context) => {
       if (userId) {
-        return await User.findById(userId);
+        return await User.findOne(userId);
       }
       if (username) {
         return await User.findOne({ username });
@@ -80,12 +80,15 @@ const resolvers = {
               $set: {
                 "pokemon.$[pokedex].perfectIV": pokedex.perfectIV,
                 "pokemon.$[pokedex].nature": pokedex.nature,
-                "pokemon.$[pokedex].evSpread.hp": pokedex.evSpread.hp,
-                "pokemon.$[pokedex].evSpread.attack": pokedex.evSpread.attack,
-                "pokemon.$[pokedex].evSpread.defense": pokedex.evSpread.defense,
-                "pokemon.$[pokedex].evSpread.spAtk": pokedex.evSpread.spAtk,
-                "pokemon.$[pokedex].evSpread.spDef": pokedex.evSpread.spDef,
-                "pokemon.$[pokedex].evSpread.speed": pokedex.evSpread.speed,
+                "pokemon.$[pokedex].evSpread": {
+                  hp: pokedex.evSpread.hp,
+                  attack: pokedex.evSpread.attack,
+                  defense: pokedex.evSpread.defense,
+                  spAtk: pokedex.evSpread.spAtk,
+                  spDef: pokedex.evSpread.spDef,
+                  speed: pokedex.evSpread.speed,
+                },
+                "pokemon.$[pokedex].forms": pokedex.forms,
               },
             },
             {
@@ -134,67 +137,6 @@ const resolvers = {
           return updatedPokedex.pokemon[pokemonIdIndex];
         } catch (err) {
           console.log(err);
-        }
-      }
-    },
-    updatePokemonForm: async (parent, { pokedex }, context) => {
-      if (context.user) {
-        try {
-          const pokemonIdIndex = pokedex.pokedexNum - 1;
-
-          const updatedPokedexForm = await User.findByIdAndUpdate(
-            pokedex.userId,
-            {
-              $set: {
-                "pokemon.$[pokedex].forms.$[formArr].perfectIV":
-                  pokedex.form[0].perfectIV,
-              },
-            },
-            {
-              arrayFilters: [
-                {
-                  "pokedex.pokedexNum": pokedex.pokedexNum,
-                },
-                {
-                  "formArr.formName": pokedex.form[0].formName,
-                },
-              ],
-              new: true,
-            }
-          );
-
-          return updatedPokedexForm.pokemon[pokemonIdIndex];
-        } catch (err) {
-          console.error(err);
-        }
-      } else if (pokedex.userId) {
-        try {
-          const pokemonIdIndex = pokedex.pokedexNum - 1;
-
-          const updatedPokedexForm = await User.findByIdAndUpdate(
-            pokedex.userId,
-            {
-              $set: {
-                "pokemon.$[pokedex].forms.$[formArr].perfectIV":
-                  pokedex.form[0].perfectIV,
-              },
-            },
-            {
-              arrayFilters: [
-                {
-                  "pokedex.pokedexNum": pokedex.pokedexNum,
-                },
-                {
-                  "formArr.formName": pokedex.form[0].formName,
-                },
-              ],
-              new: true,
-            }
-          );
-
-          return updatedPokedexForm.pokemon[pokemonIdIndex];
-        } catch (err) {
-          console.error(err);
         }
       }
     },
