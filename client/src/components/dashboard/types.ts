@@ -9,6 +9,7 @@ export interface iPokemon {
   pokemonName: string;
   pokedexNum: number;
   sprite: string;
+  shinySprite: string;
   femaleSprite: string;
   genderDifference: boolean;
   perfectIV: boolean;
@@ -42,6 +43,7 @@ export interface iEvSpread {
 export interface iPokemonForms {
   formName: string;
   sprite: string;
+  shinySprite: string;
   perfectIV: boolean;
   hiddenAbility?: string;
 }

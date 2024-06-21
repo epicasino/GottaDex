@@ -10,6 +10,7 @@ const typeDefs = `
     pokemonName: String!
     pokedexNum: Int!
     sprite: String!
+    shinySprite: String
     femaleSprite: String
     genderDifference: Boolean!
     perfectIV: Boolean!
@@ -56,6 +57,7 @@ const typeDefs = `
   type Form {
     formName: String!
     sprite: String!
+    shinySprite: String
     perfectIV: Boolean!
     hiddenAbility: String
   }
