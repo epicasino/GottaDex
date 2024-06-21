@@ -17,6 +17,7 @@ const createPokedex = async () => {
       sprite: pokemonInfo.sprites.front_default,
       shinySprite: pokemonInfo.sprites.front_shiny,
       femaleSprite: pokemonInfo.sprites.front_female || "N/A",
+      femaleShinySprite: pokemonInfo.sprites.front_shiny_female || "N/A",
       perfectIV: false,
       hiddenAbility: "",
       nature: "",
@@ -128,7 +129,7 @@ const createPokedex = async () => {
             console.log(pokemonSpecies.varieties[varietiesI].pokemon.name);
             // SPECIAL CASE FOR SQUAWKABILLY: GREEN & BLUE PLUMAGE DIFF HIDDEN ABILITIES -> NOW FOR MANY MORE POKEMON W/ REGION FORMS.
             if (
-              /squawkabilly|rattata|raticate|raichu|sandshrew|sandslash|vulpix|ninetales|diglett|dugtrio|meowth|persian|geodude|graveler|golem|grimer|muk|exeggutor|marowak|ponyta|rapidash|slowpoke|slowbro|farfetchd|weezing|mr-mime|articuno|zapdos|moltres|slowking|corsola|zigzagoon|linoone|darumaka|darmanitan|yamask|stunfisk|glowlithe|arcanine|voltorb|electrode|typhlosion|qwilfish|sneasel|samurott|lilligant|basculin|zorua|zoroark|braviary|sliggoo|goodra|avalugg|decidueye|wooper|tauros|zarude/.test(
+              /squawkabilly|rattata|raticate|raichu|sandshrew|sandslash|vulpix|ninetales|diglett|dugtrio|meowth|persian|geodude|graveler|golem|grimer|muk|exeggutor|marowak|ponyta|rapidash|slowpoke|slowbro|farfetchd|weezing|mr-mime|articuno|zapdos|moltres|slowking|corsola|zigzagoon|linoone|darumaka|darmanitan|yamask|stunfisk|glowlithe|arcanine|voltorb|electrode|typhlosion|qwilfish|sneasel|samurott|lilligant|basculin|zorua|zoroark|braviary|sliggoo|goodra|avalugg|decidueye|wooper|tauros/.test(
                 pokemon.pokemonName
               )
             ) {
@@ -174,6 +175,7 @@ const createPokedex = async () => {
     }
     // SPECIAL CASE FOR UNOWN, BURMY, SHELLOS, GASTRODON, DEERLING, ETC
     // IVE FOUND FOR SINISTEA, POLTEAGEIST, ALCREMIE, POLTCHAGEIST, SINISTCHA THAT ALL FORMS INCLUDED IN THEM DO NOT HAVE UNIQUE SPRITES. POKEDEX.JSON IS MODIFIED TO FIX THAT, BUT FIX CODE ACCORDING TO THIS INFO.
+    // ZARUDE IS BEING WEIRD WITH ZARUDE-DADA FORM, FIXED IN POKEDEX.JSON BUT NEEDS TO BE FIXED IN CODE.
     if (
       /unown|burmy|shellos|gastrodon|deerling|sawsbuck|vivillon|flabebe|floette|florges|sinistea|polteageist|alcremie|poltchageist|sinistcha/.test(
         pokemon.pokemonName
