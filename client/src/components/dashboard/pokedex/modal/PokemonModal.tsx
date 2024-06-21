@@ -79,14 +79,14 @@ function PokemonModal({
       }}
     >
       <article
-        className={`bg-zinc-950 w-2/4 tinyFont rounded-md p-5 text-slate-50 ${
+        className={`bg-zinc-950 md:w-1/2 h-[75vh] md:h-fit overflow-scroll md:overflow-auto p-5 tinyFont rounded-md text-slate-50 ${
           pokemonSaved && 'border-green-500 p-4 border-4'
         }`}
       >
         {/* pokemon name & pokedex num */}
         <header className="flex justify-between px-5">
           <div className="flex flex-col">
-            <h2 className="text-4xl">
+            <h2 className="text-2xl md:text-4xl">
               {selectedPokemonInfo.pokemonName.charAt(0).toLocaleUpperCase() +
                 selectedPokemonInfo.pokemonName.replace(/-/g, ' ').slice(1)}
             </h2>
@@ -103,7 +103,9 @@ function PokemonModal({
               />
             </label>
           </div>
-          <h2 className="text-4xl pb-4">#{selectedPokemonInfo.pokedexNum}</h2>
+          <h2 className="text-2xl md:text-4xl pb-4">
+            #{selectedPokemonInfo.pokedexNum}
+          </h2>
         </header>
         <section>
           {/* pokemon's sprite(s) */}

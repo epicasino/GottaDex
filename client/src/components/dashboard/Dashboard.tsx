@@ -51,7 +51,7 @@ function Dashboard() {
               selectedPokemonInfo={userData.pokemon[selectedPokemon]}
             />
           )}
-          <header className="text-neutral-50 tinyFont p-10 mt-[5vh] flex flex-col items-center">
+          <header className="text-neutral-50 tinyFont p-5 md:p-10 mt-[5vh] flex flex-col items-center">
             <h1 className="text-5xl mb-5">Hello, {userData.username}!</h1>
             <PokemonCaughtCounter userData={userData} />
           </header>
@@ -96,7 +96,7 @@ function PokemonCaughtCounter({ userData }: { userData: iUserDataDash }) {
 
   return (
     <h4
-      className={`text-4xl underline ${
+      className={`text-2xl md:text-4xl underline ${
         pokemonCaught === userData.pokemon.length && 'text-yellow-500'
       }`}
     >

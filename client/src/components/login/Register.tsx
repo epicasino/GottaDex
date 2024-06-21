@@ -38,7 +38,7 @@ function Register({
   };
 
   return (
-    <div className="bg-zinc-950 w-2/4 h-1/4 tinyFont rounded-md p-5 text-slate-50">
+    <div className="bg-zinc-950 md:w-2/4 tinyFont rounded-md p-5 text-slate-50">
       <h2 className="text-4xl pb-4">REGISTER</h2>
       <form
         className="flex flex-col gap-2 justify-center"

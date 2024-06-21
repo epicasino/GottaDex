@@ -19,22 +19,37 @@ export default function SearchBar({
       // console.log('Searchbar Empty')
       setPokemonList(pokemon);
     } else {
-      // console.log(searchItem);
-      const searchNames = pokemon.filter((pokemonEntry) => {
-        if (pokemonEntry.pokemonName.includes(searchItem.toLowerCase())) {
-          return true;
-        } else return false;
-      });
+      // if the search item cannot be parsed into a number, run this
+      if (!parseInt(searchItem)) {
+        // console.log(searchItem);
+        const searchNames = pokemon.filter((pokemonEntry) => {
+          if (pokemonEntry.pokemonName.includes(searchItem.toLowerCase())) {
+            return true;
+          } else return false;
+        });
 
-      // console.log(searchNames);
-      setPokemonList(searchNames);
+        // console.log(searchNames);
+        setPokemonList(searchNames);
+        // if the search item is a number
+      } else {
+        const searchNames = pokemon.filter((pokemonEntry) => {
+          if (
+            pokemonEntry.pokedexNum.toString().includes(searchItem.toString())
+          ) {
+            return true;
+          } else return false;
+        });
+
+        // console.log(searchNames);
+        setPokemonList(searchNames);
+      }
     }
   }, [searchItem, pokemon, setPokemonList]);
 
   return (
     <div className="flex justify-center">
       <input
-        className="w-[50vw] text-center tinyFont rounded-sm text-lg px-4"
+        className="w-[75vw] md:w-[50vw] text-center tinyFont rounded-sm text-sm md:text-lg h-10 md:h-auto px-4"
         type="text"
         value={searchItem}
         onChange={handleInputChange}
