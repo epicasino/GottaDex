@@ -11,6 +11,7 @@ export interface iPokemon {
   sprite: string;
   shinySprite: string;
   femaleSprite: string;
+  femaleShinySprite: string;
   genderDifference: boolean;
   perfectIV: boolean;
   hiddenAbility: string;

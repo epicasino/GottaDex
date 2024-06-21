@@ -12,6 +12,7 @@ export const QUERY_ME = gql`
         sprite
         shinySprite
         femaleSprite
+        femaleShinySprite
         genderDifference
         perfectIV
         hiddenAbility
@@ -37,6 +38,7 @@ export const QUERY_ME = gql`
         forms {
           formName
           sprite
+          shinySprite
           perfectIV
           hiddenAbility
         }

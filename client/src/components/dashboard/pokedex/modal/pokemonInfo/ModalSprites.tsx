@@ -14,15 +14,29 @@ export default function ModalSprites({
             <figcaption>Male</figcaption>
           </figure>
           <figure className="flex flex-col items-center">
+            <img src={selectedPokemonInfo.shinySprite} />
+            <figcaption>Male Shiny</figcaption>
+          </figure>
+          <figure className="flex flex-col items-center">
             <img src={selectedPokemonInfo.femaleSprite} />
             <figcaption>Female</figcaption>
           </figure>
+          <figure className="flex flex-col items-center">
+            <img src={selectedPokemonInfo.femaleShinySprite} />
+            <figcaption>Male Shiny</figcaption>
+          </figure>
         </>
       ) : (
-        <figure className="flex flex-col items-center">
-          <img src={selectedPokemonInfo.sprite} />
-          <figcaption>No Gender Differences</figcaption>
-        </figure>
+        <>
+          <figure className="flex flex-col items-center">
+            <img src={selectedPokemonInfo.sprite} />
+            <figcaption>Normal</figcaption>
+          </figure>
+          <figure className="flex flex-col items-center">
+            <img src={selectedPokemonInfo.shinySprite} />
+            <figcaption>Shiny</figcaption>
+          </figure>
+        </>
       )}
     </div>
   );
