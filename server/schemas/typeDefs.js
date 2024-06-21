@@ -12,6 +12,7 @@ const typeDefs = `
     sprite: String!
     shinySprite: String
     femaleSprite: String
+    femaleShinySprite: String
     genderDifference: Boolean!
     perfectIV: Boolean!
     hiddenAbility: String

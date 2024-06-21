@@ -57,6 +57,7 @@ const resolvers = {
       return { token, user };
     },
     register: async (parent, { username, password }, context) => {
+      // console.log(pokedexJSON);
       const user = await User.create({
         username,
         password,

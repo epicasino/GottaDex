@@ -44,6 +44,9 @@ const pokemonFormSchema = new Schema({
     type: String,
     required: true,
   },
+  shinySprite: {
+    type: String,
+  },
   perfectIV: {
     type: Boolean,
     required: true,
@@ -94,6 +97,12 @@ const pokemonSchema = new Schema({
     required: true,
   },
   femaleSprite: {
+    type: String,
+  },
+  shinySprite: {
+    type: String,
+  },
+  femaleShinySprite: {
     type: String,
   },
   perfectIV: {
