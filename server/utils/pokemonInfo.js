@@ -15,6 +15,7 @@ const createPokedex = async () => {
       pokemonName: pokemonSpecies.name,
       pokedexNum: pokemonSpecies.id,
       sprite: pokemonInfo.sprites.front_default,
+      shinySprite: pokemonInfo.sprites.front_shiny,
       femaleSprite: pokemonInfo.sprites.front_female || "N/A",
       perfectIV: false,
       hiddenAbility: "",
@@ -125,25 +126,31 @@ const createPokedex = async () => {
         ) {
           if (!regex.test(pokemonSpecies.varieties[varietiesI].pokemon.name)) {
             console.log(pokemonSpecies.varieties[varietiesI].pokemon.name);
-            // SPECIAL CASE FOR SQUAWKABILLY: GREEN & BLUE PLUMAGE DIFF HIDDEN ABILITIES
-            if (pokemon.pokemonName === "squawkabilly") {
+            // SPECIAL CASE FOR SQUAWKABILLY: GREEN & BLUE PLUMAGE DIFF HIDDEN ABILITIES -> NOW FOR MANY MORE POKEMON W/ REGION FORMS.
+            if (
+              /squawkabilly|rattata|raticate|raichu|sandshrew|sandslash|vulpix|ninetales|diglett|dugtrio|meowth|persian|geodude|graveler|golem|grimer|muk|exeggutor|marowak|ponyta|rapidash|slowpoke|slowbro|farfetchd|weezing|mr-mime|articuno|zapdos|moltres|slowking|corsola|zigzagoon|linoone|darumaka|darmanitan|yamask|stunfisk|glowlithe|arcanine|voltorb|electrode|typhlosion|qwilfish|sneasel|samurott|lilligant|basculin|zorua|zoroark|braviary|sliggoo|goodra|avalugg|decidueye|wooper|tauros/.test(
+                pokemon.pokemonName
+              )
+            ) {
               const formInfo = await fetch(
                 pokemonSpecies.varieties[varietiesI].pokemon.url
               ).then((res) => res.json());
               let form = {
                 formName: formInfo.name,
                 sprite: formInfo.sprites.front_default,
+                shinySprite: formInfo.sprites.front_shiny,
                 hiddenAbility: "",
                 perfectIV: false,
               };
 
               for (
-                squawkI = 0;
-                squawkI < formInfo.abilities.length;
-                squawkI++
+                formAbilityI = 0;
+                formAbilityI < formInfo.abilities.length;
+                formAbilityI++
               ) {
-                if (formInfo.abilities[squawkI].is_hidden) {
-                  form.hiddenAbility = formInfo.abilities[squawkI].ability.name;
+                if (formInfo.abilities[formAbilityI].is_hidden) {
+                  form.hiddenAbility =
+                    formInfo.abilities[formAbilityI].ability.name;
                 }
               }
               pokemon.forms.push(form);
@@ -155,6 +162,7 @@ const createPokedex = async () => {
               let form = {
                 formName: formInfo.name,
                 sprite: formInfo.sprites.front_default,
+                shinySprite: formInfo.sprites.front_shiny,
                 perfectIV: false,
               };
 
@@ -171,24 +179,52 @@ const createPokedex = async () => {
         pokemon.pokemonName
       )
     ) {
-      const specificPokeInfo = await fetch(
-        pokemonSpecies.varieties[0].pokemon.url
-      ).then((res) => res.json());
-      for (
-        specificI = 1;
-        specificI < specificPokeInfo.forms.length;
-        specificI++
+      if (
+        /sinistea|polteageist|alcremie|poltchageist|sinistcha/.test(
+          pokemon.pokemonName
+        )
       ) {
-        const formInfo = await fetch(
-          specificPokeInfo.forms[specificI].url
+        const specificPokeInfo = await fetch(
+          pokemonSpecies.varieties[0].pokemon.url
         ).then((res) => res.json());
+        for (
+          specificI = 1;
+          specificI < specificPokeInfo.forms.length;
+          specificI++
+        ) {
+          const formInfo = await fetch(
+            specificPokeInfo.forms[specificI].url
+          ).then((res) => res.json());
 
-        let form = {
-          formName: formInfo.name,
-          sprite: formInfo.sprites.front_default,
-          perfectIV: false,
-        };
-        pokemon.forms.push(form);
+          let form = {
+            formName: formInfo.name,
+            sprite: pokemon.sprite,
+            shinySprite: pokemon.shinySprite,
+            perfectIV: false,
+          };
+          pokemon.forms.push(form);
+        }
+      } else {
+        const specificPokeInfo = await fetch(
+          pokemonSpecies.varieties[0].pokemon.url
+        ).then((res) => res.json());
+        for (
+          specificI = 1;
+          specificI < specificPokeInfo.forms.length;
+          specificI++
+        ) {
+          const formInfo = await fetch(
+            specificPokeInfo.forms[specificI].url
+          ).then((res) => res.json());
+
+          let form = {
+            formName: formInfo.name,
+            sprite: formInfo.sprites.front_default,
+            shinySprite: formInfo.sprites.front_shiny,
+            perfectIV: false,
+          };
+          pokemon.forms.push(form);
+        }
       }
     }
     console.log(pokemon.pokemonName);
