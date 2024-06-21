@@ -36,7 +36,10 @@ function PokemonForm({
 }) {
   return (
     <div className="flex flex-col items-center justify-center">
-      <img src={pokemonForm.sprite} className=" w-24" />
+      <div className="flex flex-row justify-center items-center">
+        <img src={pokemonForm.sprite} className=" w-24" />
+        <img src={pokemonForm.shinySprite} className=" w-24" />
+      </div>
       <p>{pokemonForm.formName}</p>
       <label>
         Caught?

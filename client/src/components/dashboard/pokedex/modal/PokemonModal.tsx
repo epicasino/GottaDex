@@ -79,7 +79,7 @@ function PokemonModal({
       }}
     >
       <article
-        className={`bg-zinc-950 md:w-1/2 h-[75vh] md:h-fit overflow-scroll md:overflow-auto p-5 tinyFont rounded-md text-slate-50 ${
+        className={`bg-zinc-950 md:w-1/2 h-[70vh] md:h-fit overflow-scroll md:overflow-auto p-5 tinyFont rounded-md text-slate-50 ${
           pokemonSaved && 'border-green-500 p-4 border-4'
         }`}
       >
