@@ -19,7 +19,7 @@ function PokemonCard({
 
   return (
     <div
-      className={`w-48 h-48 flex flex-col items-center justify-center rounded-md transition ${
+      className={`w-20 h-20 md:w-48 md:h-48 flex flex-col items-center justify-center rounded-md transition ${
         pokemon.perfectIV && pokemon.forms.length === 0
           ? 'bg-yellow-400 hover:bg-yellow-500/50'
           : pokemon.perfectIV && pokemon.forms.every((form) => form.perfectIV)
@@ -30,13 +30,15 @@ function PokemonCard({
       }`}
       onClick={handleCardClick}
     >
-      <h5 className="tinyFont text-zinc-50">
+      <h5 className="tinyFont text-zinc-50 text-sm md:text-base">
         {/* capitalizes first letter */}
         {pokemon.pokemonName.charAt(0).toLocaleUpperCase() +
           pokemon.pokemonName.replace(/-/g, ' ').slice(1)}
       </h5>
       <img src={pokemon.sprite} className="h-3/5" />
-      <p className="tinyFont text-zinc-50">#{pokemon.pokedexNum}</p>
+      <p className="tinyFont text-zinc-50 text-sm md:text-base">
+        #{pokemon.pokedexNum}
+      </p>
     </div>
   );
 }

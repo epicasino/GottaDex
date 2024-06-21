@@ -34,7 +34,7 @@ export default function SearchBar({
   return (
     <div className="flex justify-center">
       <input
-        className="w-[50vw] text-center tinyFont rounded-sm text-lg px-4"
+        className="w-[75vw] md:w-[50vw] text-center tinyFont rounded-sm text-sm md:text-lg h-10 md:h-auto px-4"
         type="text"
         value={searchItem}
         onChange={handleInputChange}

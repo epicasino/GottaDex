@@ -6,6 +6,9 @@ export default {
       backgroundImage: {
         ghastly: "url('/img/ghastly.png')",
       },
+      screens: {
+        xs: '350px',
+      },
     },
   },
   plugins: [],
