@@ -1,5 +1,7 @@
 import { Dispatch } from 'react';
 import { iPokemon } from '../types';
+import SearchBar from '../searchbar/SearchBar';
+import { useState } from 'react';
 
 function PokemonCard({
   pokemon,
@@ -44,21 +46,28 @@ function PokedexContainer({
   setShowModal,
   setSelectedPokemon,
 }: {
-  pokemon: [iPokemon];
+  pokemon: iPokemon[];
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
   setSelectedPokemon: Dispatch<React.SetStateAction<number>>;
 }) {
+  const [pokemonList, setPokemonList] = useState(pokemon);
+
+  // console.log(pokemonList);
+
   return (
-    <div className="w-full min-h-screen p-8 flex flex-wrap justify-center gap-5">
-      {pokemon.map((pokemonEntry) => (
-        <PokemonCard
-          pokemon={pokemonEntry}
-          setShowModal={setShowModal}
-          setSelectedPokemon={setSelectedPokemon}
-          key={pokemonEntry.pokedexNum}
-        />
-      ))}
-    </div>
+    <>
+      <SearchBar pokemon={pokemon} setPokemonList={setPokemonList} />
+      <div className="w-full min-h-screen p-8 flex flex-wrap justify-center gap-5 content-start">
+        {pokemonList.map((pokemonEntry) => (
+          <PokemonCard
+            pokemon={pokemonEntry}
+            setShowModal={setShowModal}
+            setSelectedPokemon={setSelectedPokemon}
+            key={pokemonEntry.pokedexNum}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 

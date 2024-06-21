@@ -10,7 +10,6 @@ function Dashboard() {
   const { loading, data, refetch } = useQuery(QUERY_ME);
 
   const userData: iUserDataDash = data?.me;
-
   const [showModal, setShowModal] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(0);
   const [refetched, setRefetched] = useState(false);
@@ -36,7 +35,7 @@ function Dashboard() {
         return setRefetched(false);
       }
     }
-  }, [showModal, refetched, refetch]);
+  }, [showModal, refetched, refetch, loading]);
 
   return (
     <main className="min-h-screen min-w-screen bg-zinc-950 flex flex-col items-center">
@@ -52,8 +51,9 @@ function Dashboard() {
               selectedPokemonInfo={userData.pokemon[selectedPokemon]}
             />
           )}
-          <header className="text-neutral-50 tinyFont text-5xl p-10 mt-[5vh]">
-            Hello, {userData.username}!
+          <header className="text-neutral-50 tinyFont p-10 mt-[5vh] flex flex-col items-center">
+            <h1 className="text-5xl mb-5">Hello, {userData.username}!</h1>
+            <PokemonCaughtCounter userData={userData} />
           </header>
           <PokedexContainer
             pokemon={userData.pokemon}
@@ -63,6 +63,48 @@ function Dashboard() {
         </>
       )}
     </main>
+  );
+}
+
+function PokemonCaughtCounter({ userData }: { userData: iUserDataDash }) {
+  const [pokemonCaught, setPokemonCaught] = useState(
+    userData.pokemon.filter((pokemonEntry) => {
+      if (
+        (pokemonEntry.forms.length > 0 &&
+          pokemonEntry.perfectIV &&
+          pokemonEntry.forms.every((form) => form.perfectIV === true)) ||
+        (!pokemonEntry.forms.length && pokemonEntry.perfectIV)
+      ) {
+        return true;
+      } else return false;
+    }).length
+  );
+
+  useEffect(() => {
+    const caught = userData.pokemon.filter((pokemonEntry) => {
+      if (
+        (pokemonEntry.forms.length > 0 &&
+          pokemonEntry.perfectIV &&
+          pokemonEntry.forms.every((form) => form.perfectIV === true)) ||
+        (!pokemonEntry.forms.length && pokemonEntry.perfectIV)
+      ) {
+        return true;
+      } else return false;
+    }).length;
+    setPokemonCaught(caught);
+  }, [userData.pokemon, setPokemonCaught]);
+
+  return (
+    <h4
+      className={`text-4xl underline ${
+        pokemonCaught === userData.pokemon.length && 'text-yellow-500'
+      }`}
+    >
+      {pokemonCaught === userData.pokemon.length
+        ? `All`
+        : `${pokemonCaught} / ${userData.pokemon.length}`}{' '}
+      {'Pokemon Caught!'}
+    </h4>
   );
 }
 
