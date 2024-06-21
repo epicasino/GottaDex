@@ -27949,8 +27949,8 @@
     "forms": [
       {
         "formName": "zarude-dada",
-        "sprite": null,
-        "shinySprite": null,
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/893.png",
+        "shinySprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/893.png",
         "perfectIV": false
       }
     ]

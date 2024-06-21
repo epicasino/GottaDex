@@ -128,7 +128,7 @@ const createPokedex = async () => {
             console.log(pokemonSpecies.varieties[varietiesI].pokemon.name);
             // SPECIAL CASE FOR SQUAWKABILLY: GREEN & BLUE PLUMAGE DIFF HIDDEN ABILITIES -> NOW FOR MANY MORE POKEMON W/ REGION FORMS.
             if (
-              /squawkabilly|rattata|raticate|raichu|sandshrew|sandslash|vulpix|ninetales|diglett|dugtrio|meowth|persian|geodude|graveler|golem|grimer|muk|exeggutor|marowak|ponyta|rapidash|slowpoke|slowbro|farfetchd|weezing|mr-mime|articuno|zapdos|moltres|slowking|corsola|zigzagoon|linoone|darumaka|darmanitan|yamask|stunfisk|glowlithe|arcanine|voltorb|electrode|typhlosion|qwilfish|sneasel|samurott|lilligant|basculin|zorua|zoroark|braviary|sliggoo|goodra|avalugg|decidueye|wooper|tauros/.test(
+              /squawkabilly|rattata|raticate|raichu|sandshrew|sandslash|vulpix|ninetales|diglett|dugtrio|meowth|persian|geodude|graveler|golem|grimer|muk|exeggutor|marowak|ponyta|rapidash|slowpoke|slowbro|farfetchd|weezing|mr-mime|articuno|zapdos|moltres|slowking|corsola|zigzagoon|linoone|darumaka|darmanitan|yamask|stunfisk|glowlithe|arcanine|voltorb|electrode|typhlosion|qwilfish|sneasel|samurott|lilligant|basculin|zorua|zoroark|braviary|sliggoo|goodra|avalugg|decidueye|wooper|tauros|zarude/.test(
                 pokemon.pokemonName
               )
             ) {
