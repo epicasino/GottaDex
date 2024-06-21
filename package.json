@@ -8,10 +8,11 @@
     "concurrently": "^8.2.2"
   },
   "scripts": {
-    "backend": "node server/server.js --ignore client",
+    "start": "node server/server.js --ignore client",
     "frontend": "cd client && yarn run dev",
     "develop": "concurrently \"cd server && yarn run watch\" \"cd client && yarn run dev\"",
-    "install": "cd server && yarn && cd ../client && yarn",
-    "build": "cd client && yarn run build"
+    "install": "cd server && yarn && cd ../client && yarn --production=false",
+    "build": "cd client && yarn run build",
+    "render-build": "yarn && npm run build"
   }
 }
