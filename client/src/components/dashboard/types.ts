@@ -10,9 +10,16 @@ export interface iPokemon {
   pokedexNum: number;
   sprite: string;
   shinySprite: string;
+  shinyCaught: boolean;
   femaleSprite: string;
+  femaleCaught: boolean;
+  femaleHiddenAbilityCaught: boolean;
+  femalePerfectIV: boolean;
   femaleShinySprite: string;
+  femaleShinyCaught: boolean;
   genderDifference: boolean;
+  caught: boolean;
+  hiddenAbilityCaught: boolean;
   perfectIV: boolean;
   hiddenAbility: string;
   nature: string;
@@ -45,6 +52,9 @@ export interface iPokemonForms {
   formName: string;
   sprite: string;
   shinySprite: string;
+  shinyCaught: string;
+  caught: boolean;
+  hiddenAbilityCaught: boolean;
   perfectIV: boolean;
   hiddenAbility?: string;
 }

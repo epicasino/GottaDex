@@ -7,6 +7,7 @@ import ModalEvSpread from './pokemonInfo/ModalEvSpread';
 import ModalNature from './pokemonInfo/ModalNature';
 import ModalHidden from './pokemonInfo/ModalHidden';
 import ModalForms from './pokemonInfo/ModalForms';
+import ModalCatchTypes from './pokemonInfo/ModalCatchTypes';
 
 function PokemonModal({
   setShowModal,
@@ -18,7 +19,18 @@ function PokemonModal({
   const [pokemonNature, setPokemonNature] = useState(
     selectedPokemonInfo.nature
   );
-  const [perfectIV, setPerfectIV] = useState(selectedPokemonInfo.perfectIV);
+  const [caughtTypes, setCaughtTypes] = useState({
+    caught: selectedPokemonInfo.caught,
+    hiddenAbilityCaught: selectedPokemonInfo.hiddenAbilityCaught,
+    perfectIV: selectedPokemonInfo.perfectIV,
+    shinyCaught: selectedPokemonInfo.shinyCaught,
+  });
+  const [femaleCaughtTypes, setFemaleCaughtTypes] = useState({
+    femaleCaught: selectedPokemonInfo.femaleCaught,
+    femaleHiddenAbilityCaught: selectedPokemonInfo.femaleHiddenAbilityCaught,
+    femalePerfectIV: selectedPokemonInfo.femalePerfectIV,
+    femaleShinyCaught: selectedPokemonInfo.femaleShinyCaught,
+  });
   const [pokemonEv, setPokemonEv] = useState(selectedPokemonInfo.evSpread);
   const [pokemonForms, setPokemonForms] = useState(selectedPokemonInfo.forms);
 
@@ -50,12 +62,14 @@ function PokemonModal({
       setPokemonEv(parsedPokemonEv);
 
       try {
+        // write updated mutation for pokedex with new useState data (preferably put variables in mutation defined in a seperate variable, as certain values, such as female catch properties are conditional.)
+
         const { data } = await updatePokedex({
           variables: {
             pokedex: {
               pokedexNum: selectedPokemonInfo.pokedexNum,
               nature: pokemonNature,
-              perfectIV,
+              perfectIV: caughtTypes.perfectIV,
               evSpread: parsedPokemonEv,
               forms: [...pokemonForms],
             },
@@ -79,7 +93,7 @@ function PokemonModal({
       }}
     >
       <article
-        className={`bg-zinc-950 md:w-1/2 h-[70vh] md:h-fit overflow-scroll md:overflow-auto p-5 tinyFont rounded-md text-slate-50 ${
+        className={`bg-zinc-950 md:w-1/2 h-[80vh] overflow-scroll md:overflow-auto p-5 tinyFont rounded-md text-slate-50 ${
           pokemonSaved && 'border-green-500 p-4 border-4'
         }`}
       >
@@ -90,18 +104,6 @@ function PokemonModal({
               {selectedPokemonInfo.pokemonName.charAt(0).toLocaleUpperCase() +
                 selectedPokemonInfo.pokemonName.replace(/-/g, ' ').slice(1)}
             </h2>
-            <label>
-              {selectedPokemonInfo.genderDifference
-                ? 'Caught Both Genders?'
-                : 'Caught?'}
-              <input
-                type="checkbox"
-                checked={perfectIV}
-                onChange={() => {
-                  setPerfectIV(!perfectIV);
-                }}
-              />
-            </label>
           </div>
           <h2 className="text-2xl md:text-4xl pb-4">
             #{selectedPokemonInfo.pokedexNum}
@@ -123,6 +125,14 @@ function PokemonModal({
           <ModalNature
             pokemonNature={pokemonNature}
             setPokemonNature={setPokemonNature}
+          />
+          {/* Catch Types */}
+          <ModalCatchTypes
+            pokemon={selectedPokemonInfo}
+            caughtTypes={caughtTypes}
+            setCaughtTypes={setCaughtTypes}
+            femaleCaughtTypes={femaleCaughtTypes}
+            setFemaleCaughtTypes={setFemaleCaughtTypes}
           />
           {/* evSpread */}
           <ModalEvSpread pokemonEv={pokemonEv} setPokemonEv={setPokemonEv} />

@@ -6,9 +6,7 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
+        const userData = await User.findOne({ _id: context.user._id });
         return userData;
       }
 
@@ -16,7 +14,7 @@ const resolvers = {
     },
     user: async (parent, { username, userId }, context) => {
       if (userId) {
-        return await User.findOne(userId);
+        return await User.findById(userId);
       }
       if (username) {
         return await User.findOne({ username });
