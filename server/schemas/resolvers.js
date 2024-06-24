@@ -79,7 +79,17 @@ const resolvers = {
             {
               // look over closely. evSpread may not bring desireable results.
               $set: {
+                "pokemon.$[pokedex].caught": pokedex.caught,
+                "pokemon.$[pokedex].shinyCaught": pokedex.shinyCaught,
                 "pokemon.$[pokedex].perfectIV": pokedex.perfectIV,
+                "pokemon.$[pokedex].hiddenAbilityCaught":
+                  pokedex.hiddenAbilityCaught,
+                "pokemon.$[pokedex].femaleCaught": pokedex.femaleCaught,
+                "pokemon.$[pokedex].femaleHiddenAbilityCaught":
+                  pokedex.femaleHiddenAbilityCaught,
+                "pokemon.$[pokedex].femalePerfectIV": pokedex.femalePerfectIV,
+                "pokemon.$[pokedex].femaleShinyCaught":
+                  pokedex.femaleShinyCaught,
                 "pokemon.$[pokedex].nature": pokedex.nature,
                 "pokemon.$[pokedex].evSpread": {
                   hp: pokedex.evSpread.hp,
