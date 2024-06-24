@@ -11,11 +11,18 @@ const typeDefs = `
     pokedexNum: Int!
     sprite: String!
     shinySprite: String
+    shinyCaught: Boolean
     femaleSprite: String
+    femaleCaught: Boolean
+    femaleHiddenAbilityCaught: Boolean
+    femalePerfectIV: Boolean
     femaleShinySprite: String
+    femaleShinyCaught: Boolean
     genderDifference: Boolean!
+    caught: Boolean!
     perfectIV: Boolean!
     hiddenAbility: String
+    hiddenAbilityCaught: Boolean
     nature: String
     pokemonLocation: PokemonLocation
     evSpread: EvSpread
@@ -25,7 +32,15 @@ const typeDefs = `
     userId: String
     pokedexNum: Int!
     nature: String
+    caught: Boolean
+    hiddenAbilityCaught: Boolean
     perfectIV: Boolean
+    shinyCaught: Boolean
+    femaleCaught: Boolean
+    femaleHiddenAbilityCaught: Boolean
+    femalePerfectIV: Boolean
+    femaleShinyCaught: Boolean
+
     evSpread: EvSpreadInput
     forms: [FormInput]
   }
@@ -59,11 +74,17 @@ const typeDefs = `
     formName: String!
     sprite: String!
     shinySprite: String
+    caught: Boolean!
+    hiddenAbilityCaught: Boolean
+    shinyCaught: Boolean
     perfectIV: Boolean!
     hiddenAbility: String
   }
   input FormInput {
     formName: String
+    caught: Boolean
+    hiddenAbilityCaught: Boolean
+    shinyCaught: Boolean
     perfectIV: Boolean
     sprite: String
     hiddenAbility: String

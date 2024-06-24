@@ -18,10 +18,40 @@ const createPokedex = async () => {
       shinySprite: pokemonInfo.sprites.front_shiny,
       femaleSprite: pokemonInfo.sprites.front_female || null,
       femaleShinySprite: pokemonInfo.sprites.front_shiny_female,
+      caught: false,
       perfectIV: false,
       hiddenAbility: "",
       nature: "",
       genderDifference: pokemonSpecies.has_gender_differences,
+    };
+
+    if (pokemon.genderDifference) {
+      pokemon.femaleCaught = false;
+      pokemon.femaleHiddenAbilityCaught = false;
+      pokemon.femalePerfectIV = false;
+      if (pokemon.femaleShinySprite !== null) {
+        pokemon.femaleShinyCaught = false;
+      }
+    }
+
+    if (pokemon.shinySprite !== null) {
+      pokemon.shinyCaught = false;
+    }
+
+    for (
+      abilityIndex = 0;
+      abilityIndex < pokemonInfo.abilities.length;
+      abilityIndex++
+    ) {
+      if (pokemonInfo.abilities[abilityIndex].is_hidden) {
+        pokemon.hiddenAbility =
+          pokemonInfo.abilities[abilityIndex].ability.name;
+        pokemon.hiddenAbilityCaught = false;
+      }
+    }
+
+    pokemon = {
+      ...pokemon,
       pokemonLocation: {
         swordShield: false,
         swordShieldCrown: false,
@@ -43,17 +73,7 @@ const createPokedex = async () => {
       forms: [],
     };
 
-    for (
-      abilityIndex = 0;
-      abilityIndex < pokemonInfo.abilities.length;
-      abilityIndex++
-    ) {
-      if (pokemonInfo.abilities[abilityIndex].is_hidden) {
-        pokemon.hiddenAbility =
-          pokemonInfo.abilities[abilityIndex].ability.name;
-      }
-    }
-
+    // loop to check if pokemon is in a region's pokedex
     for (
       pokedexI = 0;
       pokedexI < pokemonSpecies.pokedex_numbers.length;
@@ -111,6 +131,7 @@ const createPokedex = async () => {
           let form = {
             formName: formInfo.name,
             sprite: formInfo.sprites.front_default,
+            caught: false,
             perfectIV: false,
           };
 
@@ -141,8 +162,14 @@ const createPokedex = async () => {
                 sprite: formInfo.sprites.front_default,
                 shinySprite: formInfo.sprites.front_shiny,
                 hiddenAbility: "",
+                hiddenAbilityCaught: false,
+                caught: false,
                 perfectIV: false,
               };
+
+              if (form.shinySprite !== null) {
+                form.shinyCaught = false;
+              }
 
               for (
                 formAbilityI = 0;
@@ -164,8 +191,13 @@ const createPokedex = async () => {
                 formName: formInfo.name,
                 sprite: formInfo.sprites.front_default,
                 shinySprite: formInfo.sprites.front_shiny,
+                caught: false,
                 perfectIV: false,
               };
+
+              if (form.shinySprite !== null) {
+                form.shinyCaught = false;
+              }
 
               pokemon.forms.push(form);
             }
@@ -202,8 +234,14 @@ const createPokedex = async () => {
             formName: formInfo.name,
             sprite: pokemon.sprite,
             shinySprite: pokemon.shinySprite,
+            caught: false,
             perfectIV: false,
           };
+
+          if (form.shinySprite !== null) {
+            form.shinyCaught = false;
+          }
+
           pokemon.forms.push(form);
         }
       } else {
@@ -223,8 +261,13 @@ const createPokedex = async () => {
             formName: formInfo.name,
             sprite: formInfo.sprites.front_default,
             shinySprite: formInfo.sprites.front_shiny,
+            caught: false,
             perfectIV: false,
           };
+
+          if (form.shinySprite !== null) {
+            form.shinyCaught = false;
+          }
           pokemon.forms.push(form);
         }
       }

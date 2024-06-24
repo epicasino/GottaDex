@@ -1,21 +1,29 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_ME = gql`
-  query Me {
+  query Query {
     me {
       _id
       username
+      password
       progress
       pokemon {
         pokemonName
         pokedexNum
         sprite
         shinySprite
+        shinyCaught
         femaleSprite
+        femaleCaught
+        femaleHiddenAbilityCaught
+        femalePerfectIV
         femaleShinySprite
+        femaleShinyCaught
         genderDifference
+        caught
         perfectIV
         hiddenAbility
+        hiddenAbilityCaught
         nature
         pokemonLocation {
           swordShield
@@ -39,6 +47,9 @@ export const QUERY_ME = gql`
           formName
           sprite
           shinySprite
+          caught
+          hiddenAbilityCaught
+          shinyCaught
           perfectIV
           hiddenAbility
         }

@@ -29,10 +29,7 @@ export const LOGIN_USER = gql`
 export const UPDATE_POKEDEX = gql`
   mutation UpdatePokedex($pokedex: PokemonInput) {
     updatePokedex(pokedex: $pokedex) {
-      pokemonName
-      pokedexNum
-      perfectIV
-      nature
+      caught
       evSpread {
         hp
         attack
@@ -41,12 +38,26 @@ export const UPDATE_POKEDEX = gql`
         spDef
         speed
       }
+      femaleCaught
+      femaleHiddenAbilityCaught
+      femalePerfectIV
+      femaleShinyCaught
+      femaleShinySprite
+      femaleSprite
       forms {
         formName
         sprite
+        shinySprite
+        caught
+        hiddenAbilityCaught
+        shinyCaught
         perfectIV
         hiddenAbility
       }
+      hiddenAbilityCaught
+      nature
+      perfectIV
+      shinyCaught
     }
   }
 `;

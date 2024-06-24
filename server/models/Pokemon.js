@@ -47,12 +47,21 @@ const pokemonFormSchema = new Schema({
   shinySprite: {
     type: String,
   },
+  shinyCaught: {
+    type: Boolean,
+  },
+  caught: {
+    type: Boolean,
+  },
   perfectIV: {
     type: Boolean,
     required: true,
   },
   hiddenAbility: {
     type: String,
+  },
+  hiddenAbilityCaught: {
+    type: Boolean,
   },
 });
 
@@ -99,18 +108,37 @@ const pokemonSchema = new Schema({
   femaleSprite: {
     type: String,
   },
+  femaleCaught: {
+    type: Boolean,
+  },
   shinySprite: {
     type: String,
   },
+  shinyCaught: {
+    type: Boolean,
+  },
   femaleShinySprite: {
     type: String,
+  },
+  caught: {
+    type: Boolean,
+    required: true,
   },
   perfectIV: {
     type: Boolean,
     required: true,
   },
+  femalePerfectIV: {
+    type: Boolean,
+  },
   hiddenAbility: {
     type: String,
+  },
+  hiddenAbilityCaught: {
+    type: Boolean,
+  },
+  femaleHiddenAbilityCaught: {
+    type: Boolean,
   },
   nature: {
     type: String,
