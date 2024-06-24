@@ -109,7 +109,6 @@ const resolvers = {
               new: true,
             }
           );
-
           return updatedPokedex.pokemon[pokemonIdIndex];
         } catch (err) {
           console.log(err);

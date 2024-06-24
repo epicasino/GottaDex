@@ -45,6 +45,21 @@ function PokemonForm({
         Caught?
         <input
           type="checkbox"
+          checked={pokemonForm.caught}
+          onChange={() => {
+            const tempArr = pokemonForms.map((form) => {
+              if (form.formName === pokemonForm.formName) {
+                return { ...form, caught: !pokemonForm.caught };
+              } else return form;
+            }) as [iPokemonForms];
+            setPokemonForms(tempArr);
+          }}
+        />
+      </label>
+      <label>
+        Perfect IV?
+        <input
+          type="checkbox"
           checked={pokemonForm.perfectIV}
           onChange={() => {
             const tempArr = pokemonForms.map((form) => {
@@ -57,7 +72,47 @@ function PokemonForm({
         />
       </label>
       {pokemonForm.hiddenAbility && (
-        <p>Hidden Ability: {pokemonForm.hiddenAbility}</p>
+        <>
+          <p>Hidden Ability: {pokemonForm.hiddenAbility}</p>
+          <label>
+            Caught w/ Hidden Ability?
+            <input
+              type="checkbox"
+              checked={pokemonForm.hiddenAbilityCaught}
+              onChange={() => {
+                const tempArr = pokemonForms.map((form) => {
+                  if (form.formName === pokemonForm.formName) {
+                    return {
+                      ...form,
+                      hiddenAbilityCaught: !pokemonForm.hiddenAbilityCaught,
+                    };
+                  } else return form;
+                }) as [iPokemonForms];
+                setPokemonForms(tempArr);
+              }}
+            />
+          </label>
+        </>
+      )}
+      {pokemonForm.shinySprite !== null && (
+        <label>
+          Shiny Caught?
+          <input
+            type="checkbox"
+            checked={pokemonForm.shinyCaught}
+            onChange={() => {
+              const tempArr = pokemonForms.map((form) => {
+                if (form.formName === pokemonForm.formName) {
+                  return {
+                    ...form,
+                    shinyCaught: !pokemonForm.shinyCaught,
+                  };
+                } else return form;
+              }) as [iPokemonForms];
+              setPokemonForms(tempArr);
+            }}
+          />
+        </label>
       )}
     </div>
   );

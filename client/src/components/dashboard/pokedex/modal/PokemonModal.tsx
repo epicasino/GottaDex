@@ -1,7 +1,7 @@
 import { Dispatch, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { UPDATE_POKEDEX } from '../../../../utils/mutations';
-import { iEvSpread, iPokemon } from '../../types';
+import { iEvSpread, iPokedexVariables, iPokemon } from '../../types';
 import ModalSprites from './pokemonInfo/ModalSprites';
 import ModalEvSpread from './pokemonInfo/ModalEvSpread';
 import ModalNature from './pokemonInfo/ModalNature';
@@ -62,17 +62,51 @@ function PokemonModal({
       setPokemonEv(parsedPokemonEv);
 
       try {
-        // write updated mutation for pokedex with new useState data (preferably put variables in mutation defined in a seperate variable, as certain values, such as female catch properties are conditional.)
+        let pokedexVariables: iPokedexVariables = {
+          pokedexNum: selectedPokemonInfo.pokedexNum,
+          nature: pokemonNature,
+          caught: caughtTypes.caught,
+          perfectIV: caughtTypes.perfectIV,
+          evSpread: parsedPokemonEv,
+          // forms: [...pokemonForms],
+        };
+        // if pokemon has a hidden ability- attach hidden ability property from state
+        if (selectedPokemonInfo.hiddenAbility !== null) {
+          pokedexVariables = {
+            ...pokedexVariables,
+            hiddenAbilityCaught: caughtTypes.hiddenAbilityCaught,
+          };
+        }
+
+        // if pokemon has a shiny sprite link- attach shinyCaught property from state
+        if (selectedPokemonInfo.shinySprite !== null) {
+          pokedexVariables = {
+            ...pokedexVariables,
+            shinyCaught: caughtTypes.shinyCaught,
+          };
+        }
+        // if pokemone has a gender difference, attach femaleCaught properties from state
+        if (selectedPokemonInfo.genderDifference) {
+          pokedexVariables = {
+            ...pokedexVariables,
+            femaleCaught: femaleCaughtTypes.femaleCaught,
+            femaleHiddenAbilityCaught:
+              femaleCaughtTypes.femaleHiddenAbilityCaught,
+            femalePerfectIV: femaleCaughtTypes.femalePerfectIV,
+          };
+          if (selectedPokemonInfo.femaleShinySprite !== null) {
+            pokedexVariables = {
+              ...pokedexVariables,
+              femaleShinyCaught: femaleCaughtTypes.femaleShinyCaught,
+            };
+          }
+        }
+
+        // console.log(pokedexVariables);
 
         const { data } = await updatePokedex({
           variables: {
-            pokedex: {
-              pokedexNum: selectedPokemonInfo.pokedexNum,
-              nature: pokemonNature,
-              perfectIV: caughtTypes.perfectIV,
-              evSpread: parsedPokemonEv,
-              forms: [...pokemonForms],
-            },
+            pokedex: pokedexVariables,
           },
         });
 

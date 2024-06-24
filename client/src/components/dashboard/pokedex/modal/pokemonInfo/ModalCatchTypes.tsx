@@ -68,11 +68,11 @@ export default function ModalCatchTypes({
               w/ Hidden Ability?
               <input
                 type="checkbox"
-                checked={caughtTypes.caught}
+                checked={caughtTypes.hiddenAbilityCaught}
                 onChange={() => {
                   setCaughtTypes({
                     ...caughtTypes,
-                    caught: !caughtTypes.caught,
+                    hiddenAbilityCaught: !caughtTypes.hiddenAbilityCaught,
                   });
                 }}
               />
@@ -81,15 +81,30 @@ export default function ModalCatchTypes({
               Perfect IV w/ Hidden Ability?
               <input
                 type="checkbox"
-                checked={caughtTypes.caught}
+                checked={caughtTypes.perfectIV}
                 onChange={() => {
                   setCaughtTypes({
                     ...caughtTypes,
-                    caught: !caughtTypes.caught,
+                    perfectIV: !caughtTypes.perfectIV,
                   });
                 }}
               />
             </label>
+            {pokemon.shinySprite !== null && (
+              <label>
+                Caught Shiny?
+                <input
+                  type="checkbox"
+                  checked={caughtTypes.shinyCaught}
+                  onChange={() => {
+                    setCaughtTypes({
+                      ...caughtTypes,
+                      shinyCaught: !caughtTypes.shinyCaught,
+                    });
+                  }}
+                />
+              </label>
+            )}
           </div>
           <div className="flex flex-col">
             <h6 className="text-xl underline">Female</h6>
@@ -128,16 +143,86 @@ export default function ModalCatchTypes({
                 onChange={() => {
                   setFemaleCaughtTypes({
                     ...femaleCaughtTypes,
-                    femaleCaught: !femaleCaughtTypes.femalePerfectIV,
+                    femalePerfectIV: !femaleCaughtTypes.femalePerfectIV,
                   });
                 }}
               />
             </label>
+            {pokemon.femaleShinySprite !== null && (
+              <label>
+                Caught Shiny?
+                <input
+                  type="checkbox"
+                  checked={femaleCaughtTypes.femaleShinyCaught}
+                  onChange={() => {
+                    setFemaleCaughtTypes({
+                      ...femaleCaughtTypes,
+                      femaleShinyCaught: !femaleCaughtTypes.femaleShinyCaught,
+                    });
+                  }}
+                />
+              </label>
+            )}
           </div>
         </div>
       ) : (
         // when there isn't a gender difference
-        <></>
+        <div className="flex flex-col items-center">
+          <label>
+            Caught Male?
+            <input
+              type="checkbox"
+              checked={caughtTypes.caught}
+              onChange={() => {
+                setCaughtTypes({
+                  ...caughtTypes,
+                  caught: !caughtTypes.caught,
+                });
+              }}
+            />
+          </label>
+          <label>
+            w/ Hidden Ability?
+            <input
+              type="checkbox"
+              checked={caughtTypes.hiddenAbilityCaught}
+              onChange={() => {
+                setCaughtTypes({
+                  ...caughtTypes,
+                  hiddenAbilityCaught: !caughtTypes.hiddenAbilityCaught,
+                });
+              }}
+            />
+          </label>
+          <label>
+            Perfect IV w/ Hidden Ability?
+            <input
+              type="checkbox"
+              checked={caughtTypes.perfectIV}
+              onChange={() => {
+                setCaughtTypes({
+                  ...caughtTypes,
+                  perfectIV: !caughtTypes.perfectIV,
+                });
+              }}
+            />
+          </label>
+          {pokemon.shinySprite !== null && (
+            <label>
+              Caught Shiny?
+              <input
+                type="checkbox"
+                checked={caughtTypes.shinyCaught}
+                onChange={() => {
+                  setCaughtTypes({
+                    ...caughtTypes,
+                    shinyCaught: !caughtTypes.shinyCaught,
+                  });
+                }}
+              />
+            </label>
+          )}
+        </div>
       )}
     </div>
   );

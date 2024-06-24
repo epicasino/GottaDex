@@ -120,6 +120,9 @@ const pokemonSchema = new Schema({
   femaleShinySprite: {
     type: String,
   },
+  femaleShinyCaught: {
+    type: Boolean,
+  },
   caught: {
     type: Boolean,
     required: true,

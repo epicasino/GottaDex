@@ -52,9 +52,24 @@ export interface iPokemonForms {
   formName: string;
   sprite: string;
   shinySprite: string;
-  shinyCaught: string;
+  shinyCaught?: boolean;
   caught: boolean;
-  hiddenAbilityCaught: boolean;
+  hiddenAbilityCaught?: boolean;
   perfectIV: boolean;
   hiddenAbility?: string;
+}
+
+export interface iPokedexVariables {
+  pokedexNum: number;
+  nature: string;
+  caught: boolean;
+  hiddenAbilityCaught?: boolean;
+  perfectIV: boolean;
+  shinyCaught?: boolean;
+  femaleCaught?: boolean;
+  femaleHiddenAbilityCaught?: boolean;
+  femalePerfectIV?: boolean;
+  femaleShinyCaught?: boolean;
+  evSpread: iEvSpread;
+  forms?: iPokemonForms[];
 }

@@ -16,7 +16,7 @@ const createPokedex = async () => {
       pokedexNum: pokemonSpecies.id,
       sprite: pokemonInfo.sprites.front_default,
       shinySprite: pokemonInfo.sprites.front_shiny,
-      femaleSprite: pokemonInfo.sprites.front_female || null,
+      femaleSprite: pokemonInfo.sprites.front_female,
       femaleShinySprite: pokemonInfo.sprites.front_shiny_female,
       caught: false,
       perfectIV: false,
@@ -30,6 +30,7 @@ const createPokedex = async () => {
       pokemon.femaleHiddenAbilityCaught = false;
       pokemon.femalePerfectIV = false;
       if (pokemon.femaleShinySprite !== null) {
+        console.log(`${pokemon.pokemonName} has shiny female sprite`);
         pokemon.femaleShinyCaught = false;
       }
     }

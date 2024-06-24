@@ -32185,7 +32185,8 @@
         "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/893.png",
         "shinySprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/893.png",
         "caught": false,
-        "perfectIV": false
+        "perfectIV": false,
+        "shinyCaught": false
       }
     ]
   },
