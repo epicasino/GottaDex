@@ -5,7 +5,7 @@ export default function ModalHidden({
 }: {
   selectedPokemonInfo: iPokemon;
 }) {
-  return (
+  return selectedPokemonInfo.hiddenAbility ? (
     <p className="text-xl pb-4 text-center">
       Hidden Ability:{' '}
       <span className="underline">
@@ -14,5 +14,7 @@ export default function ModalHidden({
           selectedPokemonInfo.hiddenAbility.replace(/-/g, ' ').slice(1)}
       </span>
     </p>
+  ) : (
+    <p className="text-xl pb-4 text-center underline">No Hidden Ability</p>
   );
 }
