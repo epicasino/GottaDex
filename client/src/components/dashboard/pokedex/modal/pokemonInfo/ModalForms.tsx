@@ -10,8 +10,10 @@ export default function ModalForms({
 }) {
   return (
     <div>
-      <h5 className="my-2 text-2xl text-center">Forms</h5>
-      <div className="gap-5 justify-items-center pt-5 flex flex-row flex-wrap overflow-y-auto h-[15vh] justify-center">
+      <h5 className="my-2 text-2xl text-center border-b-zinc-50 border-b-2 pb-5">
+        Forms
+      </h5>
+      <div className="gap-5 justify-items-center flex flex-row flex-wrap overflow-y-auto h-[35vh] justify-center">
         {pokemonForms.map((pokemonForm) => (
           <PokemonForm
             pokemonForm={pokemonForm}

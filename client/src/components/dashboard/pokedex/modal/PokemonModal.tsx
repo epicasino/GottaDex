@@ -10,6 +10,7 @@ import ModalForms from './pokemonInfo/ModalForms';
 import ModalCatchTypes from './pokemonInfo/ModalCatchTypes';
 import { updatePokemon } from '../../../../utils/updatePokemon';
 import { modifyForms } from '../../../../utils/modifyForms';
+import ModalLocation from './pokemonInfo/ModalLocation';
 
 function PokemonModal({
   setShowModal,
@@ -114,6 +115,9 @@ function PokemonModal({
               setPokemonForms={setPokemonForms}
             />
           )}
+          <ModalLocation
+            pokemonLocation={selectedPokemonInfo.pokemonLocation}
+          />
           {/* submit button */}
           <button
             type="submit"

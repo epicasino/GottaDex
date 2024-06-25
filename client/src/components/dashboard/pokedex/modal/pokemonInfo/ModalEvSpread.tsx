@@ -133,7 +133,7 @@ export default function ModalEvSpread({
           </>
         )}
         <p
-          className={`border-b-zinc-50 border-b-2 pb-5 text-center text-xl ${
+          className={`border-b-zinc-50 text-center text-xl ${
             evSumErr && 'text-red-600'
           }`}
         >
