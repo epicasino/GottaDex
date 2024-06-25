@@ -23,7 +23,7 @@ export default function ModalSprites({
           </figure>
           <figure className="flex flex-col items-center">
             <img src={selectedPokemonInfo.femaleShinySprite} />
-            <figcaption>Male Shiny</figcaption>
+            <figcaption>Female Shiny</figcaption>
           </figure>
         </>
       ) : (

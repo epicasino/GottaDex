@@ -116,21 +116,32 @@ const resolvers = {
       } else if (pokedex.userId) {
         // console.log(pokedex.userId);
         try {
-          const pokemonIdIndex = pokedex.pokedexNum - 1;
-
           const updatedPokedex = await User.findByIdAndUpdate(
             pokedex.userId,
             {
               // look over closely. evSpread may not bring desireable results.
               $set: {
+                "pokemon.$[pokedex].caught": pokedex.caught,
+                "pokemon.$[pokedex].shinyCaught": pokedex.shinyCaught,
                 "pokemon.$[pokedex].perfectIV": pokedex.perfectIV,
+                "pokemon.$[pokedex].hiddenAbilityCaught":
+                  pokedex.hiddenAbilityCaught,
+                "pokemon.$[pokedex].femaleCaught": pokedex.femaleCaught,
+                "pokemon.$[pokedex].femaleHiddenAbilityCaught":
+                  pokedex.femaleHiddenAbilityCaught,
+                "pokemon.$[pokedex].femalePerfectIV": pokedex.femalePerfectIV,
+                "pokemon.$[pokedex].femaleShinyCaught":
+                  pokedex.femaleShinyCaught,
                 "pokemon.$[pokedex].nature": pokedex.nature,
-                "pokemon.$[pokedex].evSpread.hp": pokedex.evSpread.hp,
-                "pokemon.$[pokedex].evSpread.attack": pokedex.evSpread.attack,
-                "pokemon.$[pokedex].evSpread.defense": pokedex.evSpread.defense,
-                "pokemon.$[pokedex].evSpread.spAtk": pokedex.evSpread.spAtk,
-                "pokemon.$[pokedex].evSpread.spDef": pokedex.evSpread.spDef,
-                "pokemon.$[pokedex].evSpread.speed": pokedex.evSpread.speed,
+                "pokemon.$[pokedex].evSpread": {
+                  hp: pokedex.evSpread.hp,
+                  attack: pokedex.evSpread.attack,
+                  defense: pokedex.evSpread.defense,
+                  spAtk: pokedex.evSpread.spAtk,
+                  spDef: pokedex.evSpread.spDef,
+                  speed: pokedex.evSpread.speed,
+                },
+                "pokemon.$[pokedex].forms": pokedex.forms,
               },
             },
             {

@@ -27,9 +27,35 @@ export const LOGIN_USER = gql`
 `;
 
 export const UPDATE_POKEDEX = gql`
-  mutation UpdatePokedex($pokedex: PokemonInput) {
+  mutation Mutation($pokedex: PokemonInput) {
     updatePokedex(pokedex: $pokedex) {
+      pokemonName
+      pokedexNum
+      sprite
+      shinySprite
+      shinyCaught
+      femaleSprite
+      femaleCaught
+      femaleHiddenAbilityCaught
+      femalePerfectIV
+      femaleShinySprite
+      femaleShinyCaught
+      genderDifference
       caught
+      perfectIV
+      hiddenAbility
+      hiddenAbilityCaught
+      nature
+      pokemonLocation {
+        swordShield
+        swordShieldIsle
+        swordShieldCrown
+        diamondPearl
+        arceus
+        scarletViolet
+        scarletVioletKita
+        scarletVioletBlue
+      }
       evSpread {
         hp
         attack
@@ -38,12 +64,6 @@ export const UPDATE_POKEDEX = gql`
         spDef
         speed
       }
-      femaleCaught
-      femaleHiddenAbilityCaught
-      femalePerfectIV
-      femaleShinyCaught
-      femaleShinySprite
-      femaleSprite
       forms {
         formName
         sprite
@@ -54,10 +74,6 @@ export const UPDATE_POKEDEX = gql`
         perfectIV
         hiddenAbility
       }
-      hiddenAbilityCaught
-      nature
-      perfectIV
-      shinyCaught
     }
   }
 `;

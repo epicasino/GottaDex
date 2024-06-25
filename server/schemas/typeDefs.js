@@ -40,7 +40,6 @@ const typeDefs = `
     femaleHiddenAbilityCaught: Boolean
     femalePerfectIV: Boolean
     femaleShinyCaught: Boolean
-
     evSpread: EvSpreadInput
     forms: [FormInput]
   }
@@ -82,11 +81,12 @@ const typeDefs = `
   }
   input FormInput {
     formName: String
+    sprite: String
+    shinySprite: String
     caught: Boolean
     hiddenAbilityCaught: Boolean
     shinyCaught: Boolean
     perfectIV: Boolean
-    sprite: String
     hiddenAbility: String
   }
   type Auth {

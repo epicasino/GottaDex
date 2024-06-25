@@ -5,6 +5,17 @@ export interface iUserDataDash {
   pokemon: [iPokemon];
 }
 
+export interface iUserDataDashUpdate {
+  data: {
+    updatePokedex: {
+      _id: string;
+      username: string;
+      progress: number;
+      pokemon: [iPokemon];
+    };
+  };
+}
+
 export interface iPokemon {
   pokemonName: string;
   pokedexNum: number;
