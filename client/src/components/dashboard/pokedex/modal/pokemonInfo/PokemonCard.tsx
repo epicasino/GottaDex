@@ -31,7 +31,7 @@ export default function PokemonCard({
         {pokemon.pokemonName.charAt(0).toLocaleUpperCase() +
           pokemon.pokemonName.replace(/-/g, ' ').slice(1)}
       </h5>
-      <img src={pokemon.sprite} className="h-3/5" />
+      <img src={pokemonCardImg(pokemon)} className="h-3/5" />
       <p className="tinyFont text-zinc-50 text-sm md:text-base">
         #{pokemon.pokedexNum}
       </p>
@@ -39,25 +39,24 @@ export default function PokemonCard({
   );
 }
 
+function pokemonCardImg(pokemon: iPokemon) {
+  if (pokemon.genderDifference) {
+    return pokemon.shinyCaught && pokemon.femaleShinyCaught
+      ? pokemon.shinySprite
+      : pokemon.sprite;
+  }
+  return pokemon.shinyCaught ? pokemon.shinySprite : pokemon.sprite;
+}
+
 function colorText(pokemon: iPokemon) {
-  return (pokemon.caught &&
-    pokemon.hiddenAbilityCaught &&
-    pokemon.perfectIV &&
-    pokemon.femaleCaught &&
-    pokemon.femaleHiddenAbilityCaught &&
+  return (pokemon.perfectIV &&
     pokemon.femalePerfectIV &&
     pokemon.forms.every((form) => {
-      return form.caught && form.hiddenAbilityCaught && form.perfectIV
-        ? true
-        : false;
+      return form.perfectIV ? true : false;
     })) ||
-    (pokemon.caught &&
-      pokemon.hiddenAbilityCaught &&
-      pokemon.perfectIV &&
+    (pokemon.perfectIV &&
       pokemon.forms.every((form) => {
-        return form.caught && form.hiddenAbilityCaught && form.perfectIV
-          ? true
-          : false;
+        return form.perfectIV ? true : false;
       })) ||
     (pokemon.caught &&
       pokemon.hiddenAbilityCaught &&
@@ -78,9 +77,7 @@ function colorText(pokemon: iPokemon) {
       pokemon.femaleHiddenAbilityCaught ||
       pokemon.femalePerfectIV ||
       pokemon.forms.some((form) => {
-        return form.caught || form.hiddenAbilityCaught || form.perfectIV
-          ? true
-          : false;
+        return form.caught || form.hiddenAbilityCaught ? true : false;
       })
     ? 'bg-green-600 hover:bg-green-700/50'
     : 'bg-zinc-800 hover:bg-zinc-700/50';
