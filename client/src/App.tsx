@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   ApolloClient,
@@ -43,6 +43,17 @@ const client = new ApolloClient({
 
 export default function App() {
   const [loginBtn, setLoginBtn] = useState(false);
+
+  useEffect(() => {
+    if (loginBtn) {
+      // find better way to do this later
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [loginBtn]);
 
   return (
     <ApolloProvider client={client}>

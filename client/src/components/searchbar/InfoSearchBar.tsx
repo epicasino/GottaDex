@@ -4,22 +4,32 @@ import { iMatchedItem } from './types';
 
 export default function InfoSearchBar() {
   const [searchItem, setSearchItem] = useState('');
-
+  const [pulsing, setPulsing] = useState(false);
   const [matchedItem, setMatchedItem] = useState<iMatchedItem>(pokemonJSON[24]);
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const result = pokemonJSON.find((pokemon) => {
-      return pokemon.pokemonName ===
-        searchItem.split(' ').join('-').toLowerCase()
-        ? true
-        : false;
-    });
+    setPulsing(true);
 
-    if (result) {
-      setMatchedItem(result);
-    }
+    setTimeout(() => {
+      const result = pokemonJSON.find((pokemon) => {
+        return pokemon.pokemonName ===
+          searchItem
+            .split(' ')
+            .map((word) => {
+              return word.charAt(0).toLocaleLowerCase() + word.slice(1);
+            })
+            .join('-')
+          ? true
+          : false;
+      });
+      if (result) {
+        setSearchItem('');
+        setMatchedItem(result);
+      }
+      setPulsing(false);
+    }, 1500);
   };
 
   return (
@@ -27,7 +37,10 @@ export default function InfoSearchBar() {
       <h3 className="text-5xl text-zinc-50">Try It Out!</h3>
       <form onSubmit={handleSearchSubmit}>
         <input
-          className="text-center tinyFont rounded-sm text-sm md:text-2xl h-10 md:h-auto px-4 w-[80vw] md:w-[40vw]"
+          className={`text-center tinyFont rounded-sm text-sm md:text-2xl h-10 md:h-auto px-4 w-[80vw] md:w-[40vw] ${
+            pulsing ? 'animate-pulse' : 'animate-none'
+          }
+          }`}
           type="text"
           value={searchItem}
           onChange={(e) => setSearchItem(e.target.value)}
@@ -42,11 +55,18 @@ export default function InfoSearchBar() {
 function SearchBarResultCard({ matchedItem }: { matchedItem: iMatchedItem }) {
   return (
     <article className="flex flex-col items-center w-full gap-5 text-zinc-50">
-      <h2 className="text-6xl border-b-zinc-50 border-b-4 md:w-4/12 text-center">
-        {matchedItem.pokemonName.charAt(0).toLocaleUpperCase() +
-          matchedItem.pokemonName.replace(/-/g, ' ').slice(1)}
-      </h2>
-      <div className="grid grid-cols-2 md:flex md:flex-row justify-center flex-wrap gap-2">
+      <header className="text-4xl border-b-zinc-50 border-b-4 md:w-4/12 flex justify-center gap-10">
+        <h2>
+          {matchedItem.pokemonName
+            .split('-')
+            .map((word) => {
+              return word.charAt(0).toLocaleUpperCase() + word.slice(1);
+            })
+            .join(' ')}
+        </h2>
+        <h2># {matchedItem.pokedexNum}</h2>
+      </header>
+      <figure className="grid grid-cols-2 md:flex md:flex-row justify-center flex-wrap gap-2">
         <img src={matchedItem.sprite} className="md:h-32 w-auto" />
         {matchedItem.shinySprite && (
           <img src={matchedItem.shinySprite} className="md:h-32 w-auto" />
@@ -60,7 +80,7 @@ function SearchBarResultCard({ matchedItem }: { matchedItem: iMatchedItem }) {
             />
           </>
         )}
-      </div>
+      </figure>
       <section className="flex flex-col md:flex-row md:gap-12">
         <p className="text-lg text-center">{`Has ${
           matchedItem.genderDifference ? `a` : `No`
