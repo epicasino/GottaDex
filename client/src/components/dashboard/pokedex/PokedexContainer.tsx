@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
 import { iPokemon } from '../types';
-import SearchBar from '../searchbar/SearchBar';
+import SearchBar from '../../searchbar/SearchBar';
 import { useState } from 'react';
 import PokemonCard from './modal/pokemonInfo/PokemonCard';
 

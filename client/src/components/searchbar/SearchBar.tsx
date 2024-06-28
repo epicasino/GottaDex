@@ -1,5 +1,5 @@
 import { Dispatch, useEffect, useState } from 'react';
-import { iPokemon } from '../types';
+import { iPokemon } from '../dashboard/types';
 
 export default function SearchBar({
   pokemon,
