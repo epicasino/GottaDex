@@ -157,6 +157,10 @@ const pokemonSchema = new Schema({
     type: evSpreadSchema,
   },
   forms: [pokemonFormSchema],
+  notes: {
+    type: String,
+    default: "",
+  },
 });
 
 module.exports = pokemonSchema;

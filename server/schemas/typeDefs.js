@@ -27,6 +27,7 @@ const typeDefs = `
     pokemonLocation: PokemonLocation
     evSpread: EvSpread
     forms: [Form]
+    notes: String
   }
   input PokemonInput {
     userId: String
@@ -42,6 +43,7 @@ const typeDefs = `
     femaleShinyCaught: Boolean
     evSpread: EvSpreadInput
     forms: [FormInput]
+    notes: String
   }
   type PokemonLocation {
     swordShield: Boolean!

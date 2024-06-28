@@ -22,6 +22,7 @@ const createPokedex = async () => {
       perfectIV: false,
       hiddenAbility: "",
       nature: "",
+      notes: "",
       genderDifference: pokemonSpecies.has_gender_differences,
     };
 
@@ -209,13 +210,14 @@ const createPokedex = async () => {
     // SPECIAL CASE FOR UNOWN, BURMY, SHELLOS, GASTRODON, DEERLING, ETC
     // IVE FOUND FOR SINISTEA, POLTEAGEIST, ALCREMIE, POLTCHAGEIST, SINISTCHA THAT ALL FORMS INCLUDED IN THEM DO NOT HAVE UNIQUE SPRITES. POKEDEX.JSON IS MODIFIED TO FIX THAT, BUT FIX CODE ACCORDING TO THIS INFO.
     // ZARUDE IS BEING WEIRD WITH ZARUDE-DADA FORM, FIXED IN POKEDEX.JSON BUT NEEDS TO BE FIXED IN CODE.
+    // ^ MADE updatePokemonInfo.js to update certain values in the pokedex.json without doing a full pokeAPI query for pokedex entries. Zarude can be fixed through there.
     if (
-      /unown|burmy|shellos|gastrodon|deerling|sawsbuck|vivillon|flabebe|floette|florges|sinistea|polteageist|alcremie|poltchageist|sinistcha/.test(
+      /unown|burmy|shellos|gastrodon|deerling|sawsbuck|vivillon|flabebe|floette|florges|sinistea|polteageist|alcremie|poltchageist|sinistcha|zarude/.test(
         pokemon.pokemonName
       )
     ) {
       if (
-        /sinistea|polteageist|alcremie|poltchageist|sinistcha/.test(
+        /sinistea|polteageist|alcremie|poltchageist|sinistcha|zarude/.test(
           pokemon.pokemonName
         )
       ) {
