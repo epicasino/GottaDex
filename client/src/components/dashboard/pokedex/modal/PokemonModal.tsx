@@ -11,6 +11,7 @@ import ModalCatchTypes from './pokemonInfo/ModalCatchTypes';
 import { updatePokemon } from '../../../../utils/updatePokemon';
 import { modifyForms } from '../../../../utils/modifyForms';
 import ModalLocation from './pokemonInfo/ModalLocation';
+import ModalNotes from './pokemonInfo/ModalNotes';
 
 function PokemonModal({
   setShowModal,
@@ -22,6 +23,7 @@ function PokemonModal({
   const [pokemonNature, setPokemonNature] = useState(
     selectedPokemonInfo.nature
   );
+  const [pokemonNotes, setPokemonNotes] = useState(selectedPokemonInfo.notes);
   const [caughtTypes, setCaughtTypes] = useState({
     caught: selectedPokemonInfo.caught,
     hiddenAbilityCaught: selectedPokemonInfo.hiddenAbilityCaught,
@@ -85,6 +87,7 @@ function PokemonModal({
               caughtTypes,
               pokemonForms,
               femaleCaughtTypes,
+              pokemonNotes,
               // Yeah, I have no idea how to type check this one.
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
@@ -98,6 +101,8 @@ function PokemonModal({
             pokemonNature={pokemonNature}
             setPokemonNature={setPokemonNature}
           />
+          {/* notes Dropdown */}
+          <ModalNotes pokemonNotes={pokemonNotes} setPokemonNotes={setPokemonNotes}/>
           {/* Catch Types */}
           <ModalCatchTypes
             pokemon={selectedPokemonInfo}

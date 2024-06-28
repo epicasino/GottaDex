@@ -25,6 +25,7 @@ export const QUERY_ME = gql`
         hiddenAbility
         hiddenAbilityCaught
         nature
+        notes
         pokemonLocation {
           swordShield
           swordShieldIsle
@@ -75,6 +76,7 @@ export const QUERY_USER = gql`
         perfectIV
         hiddenAbility
         nature
+        notes
         pokemonLocation {
           swordShield
           swordShieldIsle

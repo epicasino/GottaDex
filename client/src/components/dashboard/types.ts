@@ -34,6 +34,7 @@ export interface iPokemon {
   perfectIV: boolean;
   hiddenAbility: string;
   nature: string;
+  notes: string;
   pokemonLocation: iPokemonLocation;
   evSpread: iEvSpread;
   forms: Array<iPokemonForms>;
@@ -73,6 +74,7 @@ export interface iPokemonForms {
 export interface iPokedexVariables {
   pokedexNum: number;
   nature: string;
+  notes: string;
   caught: boolean;
   hiddenAbilityCaught?: boolean;
   perfectIV: boolean;

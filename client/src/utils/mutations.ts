@@ -46,6 +46,7 @@ export const UPDATE_POKEDEX = gql`
       hiddenAbility
       hiddenAbilityCaught
       nature
+      notes
       pokemonLocation {
         swordShield
         swordShieldIsle

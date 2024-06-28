@@ -159,7 +159,6 @@ const pokemonSchema = new Schema({
   forms: [pokemonFormSchema],
   notes: {
     type: String,
-    default: "",
   },
 });
 

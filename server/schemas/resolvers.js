@@ -89,6 +89,7 @@ const resolvers = {
                 "pokemon.$[pokedex].femaleShinyCaught":
                   pokedex.femaleShinyCaught,
                 "pokemon.$[pokedex].nature": pokedex.nature,
+                "pokemon.$[pokedex].notes": pokedex.notes,
                 "pokemon.$[pokedex].evSpread": {
                   hp: pokedex.evSpread.hp,
                   attack: pokedex.evSpread.attack,
@@ -133,6 +134,7 @@ const resolvers = {
                 "pokemon.$[pokedex].femaleShinyCaught":
                   pokedex.femaleShinyCaught,
                 "pokemon.$[pokedex].nature": pokedex.nature,
+                "pokemon.$[pokedex].notes": pokedex.notes,
                 "pokemon.$[pokedex].evSpread": {
                   hp: pokedex.evSpread.hp,
                   attack: pokedex.evSpread.attack,

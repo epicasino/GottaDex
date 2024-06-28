@@ -22,6 +22,7 @@ export const updatePokemon = async ({
   caughtTypes,
   pokemonForms,
   femaleCaughtTypes,
+  pokemonNotes,
   updatePokedex,
   setPokemonSaved,
 }: {
@@ -43,6 +44,7 @@ export const updatePokemon = async ({
     femalePerfectIV: boolean;
     femaleShinyCaught: boolean;
   };
+  pokemonNotes: string;
   // Yeah, I have no idea how to type check this one.
   updatePokedex: (
     options?:
@@ -80,7 +82,7 @@ export const updatePokemon = async ({
     // console.log(parsedPokemonEv);
     setPokemonEv(parsedPokemonEv);
 
-    // console.log(pokemonForms);
+    // console.log(pokemonNotes);
 
     try {
       let pokedexVariables: iPokedexVariables = {
@@ -90,6 +92,7 @@ export const updatePokemon = async ({
         perfectIV: caughtTypes.perfectIV,
         evSpread: parsedPokemonEv,
         forms: pokemonForms,
+        notes: pokemonNotes,
       };
 
       // if pokemon has a hidden ability- attach hidden ability property from state
@@ -133,6 +136,7 @@ export const updatePokemon = async ({
       });
 
       if (data.updatePokedex) {
+        console.log(data.updatePokedex);
         setPokemonSaved(true);
       }
     } catch (err) {
