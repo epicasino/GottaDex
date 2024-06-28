@@ -74,6 +74,7 @@ export interface iPokemonForms {
 export interface iPokedexVariables {
   pokedexNum: number;
   nature: string;
+  notes: string;
   caught: boolean;
   hiddenAbilityCaught?: boolean;
   perfectIV: boolean;
