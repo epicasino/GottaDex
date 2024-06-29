@@ -169,7 +169,7 @@ export default function ModalCatchTypes({
         // when there isn't a gender difference
         <div className="flex flex-col items-center">
           <label>
-            Caught Male?
+            Caught?
             <input
               type="checkbox"
               checked={caughtTypes.caught}
