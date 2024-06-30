@@ -27,6 +27,12 @@ function updatePokedex() {
         }
       }
 
+      // pokeapi doesnt have accurate information, female shiny sprite is null despite having a very big gender difference.
+      if (pokemon.pokedexNum === 916) {
+        console.log(pokemon.pokemonName);
+        pokemon.femaleShinySprite = pokemon.shinySprite;
+      }
+
       // for the pokemon that didn't have any pokemon locations but appeared in crown tundra
       if (
         (pokemon.pokedexNum >= 785 && pokemon.pokedexNum <= 801) ||
