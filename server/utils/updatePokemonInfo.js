@@ -19,7 +19,7 @@ function updatePokedex() {
           pokemon.hiddenAbility
         )
       ) {
-        delete pokemon.hiddenAbility;
+        pokemon.hiddenAbility = "";
         delete pokemon.hiddenAbilityCaught;
         console.log(pokemon.pokemonName);
         if (pokemon.genderDifference) {
