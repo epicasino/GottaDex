@@ -64,21 +64,23 @@ export default function ModalCatchTypes({
                 }}
               />
             </label>
+            {pokemon.hiddenAbility && (
+              <label>
+                w/ Hidden Ability?
+                <input
+                  type="checkbox"
+                  checked={caughtTypes.hiddenAbilityCaught}
+                  onChange={() => {
+                    setCaughtTypes({
+                      ...caughtTypes,
+                      hiddenAbilityCaught: !caughtTypes.hiddenAbilityCaught,
+                    });
+                  }}
+                />
+              </label>
+            )}
             <label>
-              w/ Hidden Ability?
-              <input
-                type="checkbox"
-                checked={caughtTypes.hiddenAbilityCaught}
-                onChange={() => {
-                  setCaughtTypes({
-                    ...caughtTypes,
-                    hiddenAbilityCaught: !caughtTypes.hiddenAbilityCaught,
-                  });
-                }}
-              />
-            </label>
-            <label>
-              Perfect IV w/ Hidden Ability?
+              Perfect IV {pokemon.hiddenAbility && 'w/ Hidden Ability?'}
               <input
                 type="checkbox"
                 checked={caughtTypes.perfectIV}
@@ -121,22 +123,24 @@ export default function ModalCatchTypes({
                 }}
               />
             </label>
+            {pokemon.hiddenAbility && (
+              <label>
+                w/ Hidden Ability?
+                <input
+                  type="checkbox"
+                  checked={femaleCaughtTypes.femaleHiddenAbilityCaught}
+                  onChange={() => {
+                    setFemaleCaughtTypes({
+                      ...femaleCaughtTypes,
+                      femaleHiddenAbilityCaught:
+                        !femaleCaughtTypes.femaleHiddenAbilityCaught,
+                    });
+                  }}
+                />
+              </label>
+            )}
             <label>
-              w/ Hidden Ability?
-              <input
-                type="checkbox"
-                checked={femaleCaughtTypes.femaleHiddenAbilityCaught}
-                onChange={() => {
-                  setFemaleCaughtTypes({
-                    ...femaleCaughtTypes,
-                    femaleHiddenAbilityCaught:
-                      !femaleCaughtTypes.femaleHiddenAbilityCaught,
-                  });
-                }}
-              />
-            </label>
-            <label>
-              Perfect IV w/ Hidden Ability?
+              Perfect IV {pokemon.hiddenAbility && 'w/ Hidden Ability?'}
               <input
                 type="checkbox"
                 checked={femaleCaughtTypes.femalePerfectIV}
@@ -181,21 +185,23 @@ export default function ModalCatchTypes({
               }}
             />
           </label>
+          {pokemon.hiddenAbility && (
+            <label>
+              w/ Hidden Ability?
+              <input
+                type="checkbox"
+                checked={caughtTypes.hiddenAbilityCaught}
+                onChange={() => {
+                  setCaughtTypes({
+                    ...caughtTypes,
+                    hiddenAbilityCaught: !caughtTypes.hiddenAbilityCaught,
+                  });
+                }}
+              />
+            </label>
+          )}
           <label>
-            w/ Hidden Ability?
-            <input
-              type="checkbox"
-              checked={caughtTypes.hiddenAbilityCaught}
-              onChange={() => {
-                setCaughtTypes({
-                  ...caughtTypes,
-                  hiddenAbilityCaught: !caughtTypes.hiddenAbilityCaught,
-                });
-              }}
-            />
-          </label>
-          <label>
-            Perfect IV w/ Hidden Ability?
+            Perfect IV {pokemon.hiddenAbility && 'w/ Hidden Ability?'}
             <input
               type="checkbox"
               checked={caughtTypes.perfectIV}
