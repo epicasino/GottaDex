@@ -4,6 +4,7 @@ const path = require("path");
 const { ApolloServer } = require("@apollo/server");
 const { typeDefs, resolvers } = require("./schemas");
 const { expressMiddleware } = require("@apollo/server/express4");
+const { updatePokedex } = require("./utils/pokedex");
 const cors = require("cors");
 
 const db = require("./config/connection");
@@ -31,6 +32,8 @@ const startApolloServer = async () => {
       context: authMiddleware,
     })
   );
+
+  updatePokedex();
 
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/dist")));

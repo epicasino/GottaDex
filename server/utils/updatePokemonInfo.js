@@ -21,7 +21,7 @@ function updatePokedex() {
       ) {
         pokemon.hiddenAbility = "";
         delete pokemon.hiddenAbilityCaught;
-        console.log(pokemon.pokemonName);
+        // console.log(pokemon.pokemonName);
         if (pokemon.genderDifference) {
           delete pokemon.femaleHiddenAbilityCaught;
         }
@@ -29,7 +29,7 @@ function updatePokedex() {
 
       // pokeapi doesnt have accurate information, female shiny sprite is null despite having a very big gender difference.
       if (pokemon.pokedexNum === 916) {
-        console.log(pokemon.pokemonName);
+        // console.log(pokemon.pokemonName);
         pokemon.femaleShinySprite = pokemon.shinySprite;
       }
 
@@ -38,7 +38,7 @@ function updatePokedex() {
         (pokemon.pokedexNum >= 785 && pokemon.pokedexNum <= 801) ||
         (pokemon.pokedexNum >= 803 && pokemon.pokedexNum <= 806)
       ) {
-        console.log(pokemon.pokemonName);
+        // console.log(pokemon.pokemonName);
         pokemon.pokemonLocation.swordShieldCrown = true;
       }
 
@@ -46,8 +46,13 @@ function updatePokedex() {
         pokemon.pokedexNum === 802 ||
         (pokemon.pokedexNum >= 807 && pokemon.pokedexNum <= 809)
       ) {
-        console.log(pokemon.pokemonName);
+        // console.log(pokemon.pokemonName);
         pokemon.pokemonLocation.swordShield = true;
+      }
+
+      if (pokemon.pokedexNum >= 13 && pokemon.pokedexNum <= 22) {
+        // console.log(pokemon.pokemonName);
+        pokemon.pokemonLocation.diamondPearl = true;
       }
 
       updatedPokedex.push(pokemon);
