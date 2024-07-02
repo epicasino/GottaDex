@@ -8,6 +8,8 @@ module.exports = {
       const user = users[i];
       let pokedex = user.pokemon;
 
+      // could be edited in the future if needing to update more pokemon info, but so far pokemonLocation and hiddenAbility are the only ones being focused.
+
       pokedex.forEach((pokemon, index) => {
         pokemon.pokemonLocation = pokedexJSON[index].pokemonLocation;
         pokemon.hiddenAbility = pokedexJSON[index].hiddenAbility;
