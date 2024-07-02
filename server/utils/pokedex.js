@@ -10,9 +10,10 @@ module.exports = {
 
       pokedex.forEach((pokemon, index) => {
         pokemon.pokemonLocation = pokedexJSON[index].pokemonLocation;
+        pokemon.hiddenAbility = pokedexJSON[index].hiddenAbility;
       });
 
-      console.log(pokedex[12]);
+      // console.log(pokedex[12]);
 
       const updatedUser = await User.findByIdAndUpdate(
         user,
