@@ -40,9 +40,7 @@ function PokemonModal({
   const [pokemonForms, setPokemonForms] = useState(
     modifyForms(selectedPokemonInfo.forms)
   );
-
   const [pokemonSaved, setPokemonSaved] = useState(false);
-
   const [updatePokedex] = useMutation(UPDATE_POKEDEX);
 
   return (
@@ -102,7 +100,10 @@ function PokemonModal({
             setPokemonNature={setPokemonNature}
           />
           {/* notes Dropdown */}
-          <ModalNotes pokemonNotes={pokemonNotes} setPokemonNotes={setPokemonNotes}/>
+          <ModalNotes
+            pokemonNotes={pokemonNotes}
+            setPokemonNotes={setPokemonNotes}
+          />
           {/* Catch Types */}
           <ModalCatchTypes
             pokemon={selectedPokemonInfo}

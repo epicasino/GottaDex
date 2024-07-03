@@ -1,4 +1,4 @@
-import { Dispatch } from 'react';
+import { Dispatch, useEffect } from 'react';
 import { iPokemon } from '../types';
 import SearchBar from '../../searchbar/SearchBar';
 import { useState } from 'react';
@@ -15,11 +15,15 @@ function PokedexContainer({
 }) {
   const [pokemonList, setPokemonList] = useState(pokemon);
 
-  // console.log(pokemonList);
+  // console.log(pokemonList)
 
   return (
     <>
-      <SearchBar pokemon={pokemon} setPokemonList={setPokemonList} />
+      <SearchBar
+        pokemon={pokemon}
+        pokemonList={pokemonList}
+        setPokemonList={setPokemonList}
+      />
       <div className="w-full min-h-screen p-8 flex flex-wrap justify-center gap-5 content-start">
         {pokemonList.map((pokemonEntry) => (
           <PokemonCard
