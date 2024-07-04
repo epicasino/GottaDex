@@ -1,4 +1,4 @@
-import { Dispatch } from 'react';
+import { Dispatch, useEffect } from 'react';
 import { iPokemon } from '../types';
 import SearchBar from '../../searchbar/SearchBar';
 import { useState } from 'react';
@@ -14,8 +14,18 @@ function PokedexContainer({
   setSelectedPokemon: Dispatch<React.SetStateAction<number>>;
 }) {
   const [pokemonList, setPokemonList] = useState(pokemon);
+  const [selectPokemonArr, setSelectPokemonArr] = useState<number[]>([]);
+  const [showSelectMenu, setShowSelectMenu] = useState(false);
 
   // console.log(pokemonList)
+  // TODO: create multi-select menu component
+  useEffect(() => {
+    if (selectPokemonArr.length > 0) {
+      setShowSelectMenu(true);
+    } else {
+      setShowSelectMenu(false);
+    }
+  }, [selectPokemonArr, setShowSelectMenu, showSelectMenu]);
 
   return (
     <>
@@ -31,6 +41,8 @@ function PokedexContainer({
             setShowModal={setShowModal}
             setSelectedPokemon={setSelectedPokemon}
             key={pokemonEntry.pokedexNum}
+            selectPokemonArr={selectPokemonArr}
+            setSelectPokemonArr={setSelectPokemonArr}
           />
         ))}
       </div>
