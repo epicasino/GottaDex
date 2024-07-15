@@ -1,18 +1,48 @@
-import { Dispatch } from 'react';
+import { Dispatch, useEffect } from 'react';
 import { iPokemon } from '../../../types';
+import { useState } from 'react';
 
 export default function PokemonCard({
   pokemon,
   setShowModal,
   setSelectedPokemon,
+  selectPokemonArr,
+  setSelectPokemonArr,
 }: {
   pokemon: iPokemon;
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
   setSelectedPokemon: Dispatch<React.SetStateAction<number>>;
+  selectPokemonArr: number[];
+  setSelectPokemonArr: Dispatch<React.SetStateAction<number[]>>;
 }) {
+  const [clicked, setClicked] = useState(false);
+
+  useEffect(() => {
+    if (selectPokemonArr.length === 0) {
+      setClicked(false);
+    }
+  }, [setClicked, selectPokemonArr]);
+
   const handleCardClick = () => {
     setShowModal(true);
     setSelectedPokemon(pokemon.pokedexNum - 1);
+  };
+
+  const handleCheck = () => {
+    if (!clicked) {
+      setClicked(!clicked);
+      setSelectPokemonArr([...selectPokemonArr, pokemon.pokedexNum]);
+      setShowModal(false);
+    }
+    if (clicked) {
+      setClicked(!clicked);
+      setSelectPokemonArr(
+        selectPokemonArr.filter((entry) => {
+          return entry !== pokemon.pokedexNum;
+        })
+      );
+      setShowModal(false);
+    }
   };
 
   // 'bg-green-600 hover:bg-green-700/50' in progress
@@ -20,8 +50,8 @@ export default function PokemonCard({
   // 'bg-zinc-800 hover:bg-zinc-700/50' default
 
   return (
-    <div
-      className={`w-20 h-24 md:w-48 md:h-48 flex flex-col items-center justify-center rounded-md transition ${colorText(
+    <article
+      className={`relative w-20 h-24 md:w-48 md:h-48 flex flex-col items-center justify-center rounded-md transition ${colorText(
         pokemon
       )}`}
       onClick={handleCardClick}
@@ -35,7 +65,13 @@ export default function PokemonCard({
       <p className="tinyFont text-zinc-50 text-sm md:text-base">
         #{pokemon.pokedexNum}
       </p>
-    </div>
+      <input
+        type="checkbox"
+        className="absolute top-2 left-2 multi-select"
+        checked={clicked}
+        onChange={handleCheck}
+      />
+    </article>
   );
 }
 

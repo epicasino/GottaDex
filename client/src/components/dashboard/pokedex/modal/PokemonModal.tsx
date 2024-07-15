@@ -45,7 +45,7 @@ function PokemonModal({
 
   return (
     <div
-      className="fixed h-screen w-full bg-zinc-950/50 flex justify-center items-center"
+      className="fixed h-screen w-full bg-zinc-950/50 flex justify-center items-center z-50"
       onClick={(e) => {
         e.target === e.currentTarget && setShowModal(false);
       }}

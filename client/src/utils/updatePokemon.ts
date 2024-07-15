@@ -135,7 +135,7 @@ export const updatePokemon = async ({
         },
       });
 
-      if (data.updatePokedex) {
+      if (data?.updatePokedex) {
         console.log(data.updatePokedex);
         setPokemonSaved(true);
       }

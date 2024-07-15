@@ -35,7 +35,7 @@ function Dashboard() {
         return setRefetched(false);
       }
     }
-  }, [showModal, refetched, refetch, loading]);
+  }, [showModal, refetched, refetch]);
 
   return (
     <main className="min-h-screen min-w-screen bg-zinc-950 flex flex-col items-center">
@@ -59,6 +59,7 @@ function Dashboard() {
             pokemon={userData.pokemon}
             setShowModal={setShowModal}
             setSelectedPokemon={setSelectedPokemon}
+            refetch={refetch}
           />
         </>
       )}
