@@ -3,15 +3,22 @@ import { iPokemon } from '../types';
 import SearchBar from '../../searchbar/SearchBar';
 import { useState } from 'react';
 import PokemonCard from './modal/pokemonInfo/PokemonCard';
+import MultiSelect from './modal/multiselect/MultiSelect';
+import { ApolloQueryResult, OperationVariables } from '@apollo/client';
 
 function PokedexContainer({
   pokemon,
   setShowModal,
   setSelectedPokemon,
+  refetch,
 }: {
   pokemon: iPokemon[];
   setShowModal: Dispatch<React.SetStateAction<boolean>>;
   setSelectedPokemon: Dispatch<React.SetStateAction<number>>;
+  refetch: (
+    variables?: Partial<OperationVariables> | undefined
+    // eslint-disable-next-line
+  ) => Promise<ApolloQueryResult<any>>;
 }) {
   const [pokemonList, setPokemonList] = useState(pokemon);
   const [selectPokemonArr, setSelectPokemonArr] = useState<number[]>([]);
@@ -46,6 +53,14 @@ function PokedexContainer({
           />
         ))}
       </div>
+      {showSelectMenu && (
+        <MultiSelect
+          refetch={refetch}
+          selectPokemonArr={selectPokemonArr}
+          setSelectedPokemonArr={setSelectPokemonArr}
+          pokemon={pokemon}
+        />
+      )}
     </>
   );
 }

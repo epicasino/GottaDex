@@ -1,4 +1,4 @@
-import { Dispatch } from 'react';
+import { Dispatch, useEffect } from 'react';
 import { iPokemon } from '../../../types';
 import { useState } from 'react';
 
@@ -16,6 +16,12 @@ export default function PokemonCard({
   setSelectPokemonArr: Dispatch<React.SetStateAction<number[]>>;
 }) {
   const [clicked, setClicked] = useState(false);
+
+  useEffect(() => {
+    if (selectPokemonArr.length === 0) {
+      setClicked(false);
+    }
+  }, [setClicked, selectPokemonArr]);
 
   const handleCardClick = () => {
     setShowModal(true);

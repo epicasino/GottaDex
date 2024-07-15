@@ -6,7 +6,7 @@ export interface iUserDataDash {
 }
 
 export interface iUserDataDashUpdate {
-  data: {
+  data?: {
     updatePokedex: {
       _id: string;
       username: string;
