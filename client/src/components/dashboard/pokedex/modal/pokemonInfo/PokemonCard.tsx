@@ -107,7 +107,8 @@ function colorText(pokemon: iPokemon) {
     }
   }
   // caught
-  else if (
+  if (
+    pokemon.genderDifference &&
     (pokemon.caught ||
       pokemon.femaleCaught ||
       pokemon.forms.some((form) => {
@@ -118,6 +119,22 @@ function colorText(pokemon: iPokemon) {
       pokemon.perfectIV ||
       pokemon.femaleHiddenAbilityCaught ||
       pokemon.femalePerfectIV ||
+      pokemon.forms.some((form) => {
+        return form.perfectIV || form.hiddenAbilityCaught ? true : false;
+      })
+    )
+  ) {
+    return 'bg-zinc-200/50 hover:bg-zinc-300/25';
+  }
+  if (
+    !pokemon.genderDifference &&
+    (pokemon.caught ||
+      pokemon.forms.some((form) => {
+        return form.caught ? true : false;
+      })) &&
+    !(
+      pokemon.hiddenAbilityCaught ||
+      pokemon.perfectIV ||
       pokemon.forms.some((form) => {
         return form.perfectIV || form.hiddenAbilityCaught ? true : false;
       })
