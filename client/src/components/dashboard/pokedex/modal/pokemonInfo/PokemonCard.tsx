@@ -77,11 +77,30 @@ export default function PokemonCard({
 
 function pokemonCardImg(pokemon: iPokemon) {
   if (pokemon.genderDifference) {
-    return pokemon.shinyCaught && pokemon.femaleShinyCaught
-      ? pokemon.shinySprite
-      : pokemon.sprite;
+    if (pokemon.shinyCaught && pokemon.femaleShinyCaught) {
+      return pokemon.shinySprite;
+    }
+    if (pokemon.shinyCaught) {
+      return pokemon.shinySprite;
+    }
+    if (pokemon.femaleShinyCaught) {
+      return pokemon.femaleShinySprite;
+    }
+  } else {
+    if (pokemon.shinyCaught) return pokemon.shinySprite;
   }
-  return pokemon.shinyCaught ? pokemon.shinySprite : pokemon.sprite;
+  if (
+    pokemon.forms.some((form) => {
+      return form.shinyCaught;
+    })
+  ) {
+    return pokemon.forms[
+      pokemon.forms.findIndex((form) => {
+        return form.shinyCaught;
+      })
+    ].shinySprite;
+  }
+  return pokemon.sprite;
 }
 
 function colorText(pokemon: iPokemon) {
