@@ -13,6 +13,8 @@ module.exports = {
       pokedex.forEach((pokemon, index) => {
         pokemon.pokemonLocation = pokedexJSON[index].pokemonLocation;
         pokemon.hiddenAbility = pokedexJSON[index].hiddenAbility;
+        pokemon.femaleSprite = pokedexJSON[index].femaleSprite;
+        pokemon.femaleShinySprite = pokedexJSON[index].femaleShinySprite;
       });
 
       // console.log(pokedex[12]);

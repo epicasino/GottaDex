@@ -9,7 +9,6 @@ import {
 import { useMutation } from '@apollo/client';
 import { UPDATE_POKEDEX } from '../../../../../utils/mutations';
 import {
-  iMultiSelectVariables,
   iPokedexVariables,
   iPokemon,
   iUserDataDashUpdate,

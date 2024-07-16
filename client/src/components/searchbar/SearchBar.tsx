@@ -3,11 +3,9 @@ import { iPokemon } from '../dashboard/types';
 
 export default function SearchBar({
   pokemon,
-  pokemonList,
   setPokemonList,
 }: {
   pokemon: iPokemon[];
-  pokemonList: iPokemon[];
   setPokemonList: Dispatch<React.SetStateAction<iPokemon[]>>;
 }) {
   const [filters, setFilters] = useState({
@@ -17,72 +15,6 @@ export default function SearchBar({
     shiny: false,
   });
 
-  const uncaughtPokemon = pokemon.filter((entry) => {
-    if (
-      entry.forms.length > 0 &&
-      entry.forms.every((form) => {
-        return !form.caught;
-      })
-    ) {
-      return entry.genderDifference
-        ? !entry.caught &&
-            !entry.femaleCaught &&
-            !entry.hiddenAbilityCaught &&
-            !entry.femaleHiddenAbilityCaught &&
-            !entry.perfectIV &&
-            !entry.femalePerfectIV
-        : !entry.caught && !entry.hiddenAbilityCaught && !entry.perfectIV;
-    } else if (entry.forms.length === 0) {
-      return entry.genderDifference
-        ? !entry.caught &&
-            !entry.femaleCaught &&
-            !entry.hiddenAbilityCaught &&
-            !entry.femaleHiddenAbilityCaught &&
-            !entry.perfectIV &&
-            !entry.femalePerfectIV
-        : !entry.caught && !entry.hiddenAbilityCaught && !entry.perfectIV;
-    }
-  });
-
-  const perfectIVPokemon = pokemon.filter((entry) => {
-    if (
-      entry.forms.length > 0 &&
-      entry.forms.every((form) => {
-        return form.perfectIV;
-      })
-    ) {
-      return entry.genderDifference
-        ? entry.perfectIV && entry.femalePerfectIV
-        : entry.perfectIV;
-    } else if (entry.forms.length === 0) {
-      return entry.genderDifference
-        ? entry.perfectIV && entry.femalePerfectIV
-        : entry.perfectIV;
-    }
-  });
-
-  const shinyPokemon = pokemon.filter((entry) => {
-    if (
-      entry.forms.length > 0 &&
-      entry.forms.some((form) => {
-        return form.shinyCaught;
-      })
-    ) {
-      return entry.genderDifference
-        ? entry.shinyCaught && entry.femaleShinyCaught
-        : entry.shinyCaught;
-    } else if (entry.forms.length === 0) {
-      return entry.genderDifference
-        ? entry.shinyCaught && entry.femaleShinyCaught
-        : entry.shinyCaught;
-    }
-  });
-
-  const inProgressPokemon = pokemon.filter((entry) => {
-    return !(
-      perfectIVPokemon.includes(entry) || uncaughtPokemon.includes(entry)
-    );
-  });
   const [searchItem, setSearchItem] = useState('');
 
   const [filterButtonClicked, setFilteredButtonClicked] = useState(false);
@@ -94,20 +26,19 @@ export default function SearchBar({
   useEffect(() => {
     handleFilters({
       filters,
-      inProgressPokemon,
-      perfectIVPokemon,
-      uncaughtPokemon,
       pokemon,
-      shinyPokemon,
       setPokemonList,
     });
+  }, [filters, pokemon, setPokemonList]);
+
+  useEffect(() => {
     if (searchItem === '') {
       // console.log(pokemonList)
       return setPokemonList(pokemon);
     }
     if (!parseInt(searchItem)) {
       // console.log(searchItem);
-      const searchNames = pokemonList.filter((pokemonEntry) => {
+      const searchNames = pokemon.filter((pokemonEntry) => {
         if (pokemonEntry.pokemonName.includes(searchItem.toLowerCase())) {
           return true;
         } else return false;
@@ -116,7 +47,7 @@ export default function SearchBar({
       return setPokemonList(searchNames);
       // if the search item is a number
     } else {
-      const searchNames = pokemonList.filter((pokemonEntry) => {
+      const searchNames = pokemon.filter((pokemonEntry) => {
         if (
           pokemonEntry.pokedexNum.toString().includes(searchItem.toString())
         ) {
@@ -127,17 +58,7 @@ export default function SearchBar({
       // console.log(searchNames);
       return setPokemonList(searchNames);
     }
-  }, [
-    searchItem,
-    pokemon,
-    setPokemonList,
-    pokemonList,
-    filters,
-    inProgressPokemon,
-    perfectIVPokemon,
-    shinyPokemon,
-    uncaughtPokemon,
-  ]);
+  }, [pokemon, searchItem, setPokemonList]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
@@ -221,11 +142,7 @@ export default function SearchBar({
 
 function handleFilters({
   filters,
-  inProgressPokemon,
-  perfectIVPokemon,
-  uncaughtPokemon,
   pokemon,
-  shinyPokemon,
   setPokemonList,
 }: {
   filters: {
@@ -234,13 +151,76 @@ function handleFilters({
     perfectIV: boolean;
     shiny: boolean;
   };
-  inProgressPokemon: iPokemon[];
-  perfectIVPokemon: iPokemon[];
-  uncaughtPokemon: iPokemon[];
   pokemon: iPokemon[];
-  shinyPokemon: iPokemon[];
   setPokemonList: Dispatch<React.SetStateAction<iPokemon[]>>;
 }) {
+  const uncaughtPokemon = pokemon.filter((entry) => {
+    if (
+      entry.forms.length > 0 &&
+      entry.forms.every((form) => {
+        return !form.caught;
+      })
+    ) {
+      return entry.genderDifference
+        ? !entry.caught &&
+            !entry.femaleCaught &&
+            !entry.hiddenAbilityCaught &&
+            !entry.femaleHiddenAbilityCaught &&
+            !entry.perfectIV &&
+            !entry.femalePerfectIV
+        : !entry.caught && !entry.hiddenAbilityCaught && !entry.perfectIV;
+    } else if (entry.forms.length === 0) {
+      return entry.genderDifference
+        ? !entry.caught &&
+            !entry.femaleCaught &&
+            !entry.hiddenAbilityCaught &&
+            !entry.femaleHiddenAbilityCaught &&
+            !entry.perfectIV &&
+            !entry.femalePerfectIV
+        : !entry.caught && !entry.hiddenAbilityCaught && !entry.perfectIV;
+    }
+  });
+
+  const perfectIVPokemon = pokemon.filter((entry) => {
+    if (
+      entry.forms.length > 0 &&
+      entry.forms.every((form) => {
+        return form.perfectIV;
+      })
+    ) {
+      return entry.genderDifference
+        ? entry.perfectIV && entry.femalePerfectIV
+        : entry.perfectIV;
+    } else if (entry.forms.length === 0) {
+      return entry.genderDifference
+        ? entry.perfectIV && entry.femalePerfectIV
+        : entry.perfectIV;
+    }
+  });
+
+  const shinyPokemon = pokemon.filter((entry) => {
+    if (
+      entry.forms.length > 0 &&
+      entry.forms.some((form) => {
+        return form.shinyCaught;
+      })
+    ) {
+      return entry.genderDifference
+        ? entry.shinyCaught && entry.femaleShinyCaught
+        : entry.shinyCaught;
+    } else if (entry.forms.length === 0) {
+      return entry.genderDifference
+        ? entry.shinyCaught && entry.femaleShinyCaught
+        : entry.shinyCaught;
+    }
+  });
+
+  const inProgressPokemon = pokemon.filter((entry) => {
+    return !(
+      perfectIVPokemon.includes(entry) || uncaughtPokemon.includes(entry)
+    );
+  });
+
   if (filters.uncaught) {
     return setPokemonList(
       pokemon.filter((entry) => {
@@ -274,5 +254,15 @@ function handleFilters({
         return !shinyPokemon.includes(entry);
       })
     );
+  }
+  if (
+    !(
+      filters.uncaught &&
+      filters.inProgress &&
+      filters.perfectIV &&
+      filters.shiny
+    )
+  ) {
+    setPokemonList(pokemon);
   }
 }
