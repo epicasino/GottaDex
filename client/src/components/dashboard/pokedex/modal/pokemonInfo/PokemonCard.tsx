@@ -85,36 +85,60 @@ function pokemonCardImg(pokemon: iPokemon) {
 }
 
 function colorText(pokemon: iPokemon) {
-  return (pokemon.perfectIV &&
-    pokemon.femalePerfectIV &&
+  // perfect IV
+  if (
+    pokemon.forms.length > 0 &&
     pokemon.forms.every((form) => {
-      return form.perfectIV ? true : false;
-    })) ||
-    (pokemon.perfectIV &&
-      pokemon.forms.every((form) => {
-        return form.perfectIV ? true : false;
-      })) ||
-    (pokemon.caught &&
-      pokemon.hiddenAbilityCaught &&
-      pokemon.perfectIV &&
-      pokemon.femaleCaught &&
-      pokemon.femaleHiddenAbilityCaught &&
-      pokemon.femalePerfectIV &&
-      pokemon.forms.length !== 0) ||
-    (pokemon.caught &&
-      pokemon.hiddenAbilityCaught &&
-      pokemon.perfectIV &&
-      pokemon.forms.length !== 0)
-    ? 'bg-yellow-400 hover:bg-yellow-500/50'
-    : pokemon.caught ||
+      return form.perfectIV;
+    })
+  ) {
+    if (pokemon.genderDifference) {
+      if (pokemon.perfectIV && pokemon.femalePerfectIV)
+        return 'bg-yellow-400 hover:bg-yellow-500/50';
+    } else {
+      if (pokemon.perfectIV) return 'bg-yellow-400 hover:bg-yellow-500/50';
+    }
+  } else if (pokemon.forms.length === 0) {
+    if (pokemon.genderDifference) {
+      if (pokemon.perfectIV && pokemon.femalePerfectIV)
+        return 'bg-yellow-400 hover:bg-yellow-500/50';
+    } else {
+      if (pokemon.perfectIV) return 'bg-yellow-400 hover:bg-yellow-500/50';
+    }
+  }
+  // caught
+  else if (
+    (pokemon.caught ||
+      pokemon.femaleCaught ||
+      pokemon.forms.some((form) => {
+        return form.caught ? true : false;
+      })) &&
+    !(
       pokemon.hiddenAbilityCaught ||
       pokemon.perfectIV ||
-      pokemon.femaleCaught ||
       pokemon.femaleHiddenAbilityCaught ||
       pokemon.femalePerfectIV ||
       pokemon.forms.some((form) => {
-        return form.caught || form.hiddenAbilityCaught ? true : false;
+        return form.perfectIV || form.hiddenAbilityCaught ? true : false;
       })
-    ? 'bg-green-600 hover:bg-green-700/50'
-    : 'bg-zinc-800 hover:bg-zinc-700/50';
+    )
+  ) {
+    return 'bg-zinc-200/50 hover:bg-zinc-300/25';
+  }
+  // in progress
+  if (
+    pokemon.caught ||
+    pokemon.femaleCaught ||
+    pokemon.hiddenAbilityCaught ||
+    pokemon.perfectIV ||
+    pokemon.femaleHiddenAbilityCaught ||
+    pokemon.femalePerfectIV ||
+    pokemon.forms.some((form) => {
+      return form.hiddenAbilityCaught || form.perfectIV ? true : false;
+    })
+  ) {
+    return 'bg-green-600 hover:bg-green-700/50';
+  }
+  // NEW: uncaught
+  return 'bg-zinc-800 hover:bg-zinc-700/50';
 }
