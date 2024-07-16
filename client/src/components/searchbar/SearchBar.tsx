@@ -39,7 +39,11 @@ export default function SearchBar({
     if (!parseInt(searchItem)) {
       // console.log(searchItem);
       const searchNames = pokemon.filter((pokemonEntry) => {
-        if (pokemonEntry.pokemonName.includes(searchItem.toLowerCase())) {
+        if (
+          pokemonEntry.pokemonName.includes(
+            searchItem.trim().split(' ').join('-').toLowerCase()
+          )
+        ) {
           return true;
         } else return false;
       });
