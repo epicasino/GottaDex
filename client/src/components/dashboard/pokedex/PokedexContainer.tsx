@@ -36,11 +36,7 @@ function PokedexContainer({
 
   return (
     <>
-      <SearchBar
-        pokemon={pokemon}
-        pokemonList={pokemonList}
-        setPokemonList={setPokemonList}
-      />
+      <SearchBar pokemon={pokemon} setPokemonList={setPokemonList} />
       <div className="w-full min-h-screen p-8 flex flex-wrap justify-center gap-5 content-start">
         {pokemonList.map((pokemonEntry) => (
           <PokemonCard

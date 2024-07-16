@@ -26,6 +26,12 @@ function updatePokedex() {
         }
       }
 
+      if (pokemon.pokedexNum === 133) {
+        // console.log(pokemon.pokemonName);
+        pokemon.femaleSprite = pokemon.sprite;
+        pokemon.femaleShinySprite = pokemon.shinySprite;
+      }
+
       // pokeapi doesnt have accurate information, female shiny sprite is null despite having a very big gender difference.
       if (pokemon.pokedexNum === 916) {
         // console.log(pokemon.pokemonName);
