@@ -17,7 +17,7 @@
 
 ## Installation
 
-**Live Deployment on Render! [Click here for live deployment]([https://mesa-rim-buddy-finder.onrender.com](https://gottadex.onrender.com)**
+**Live Deployment on Render! [Click here for live deployment](https://gottadex.onrender.com)**
 
 ## Usage
 
