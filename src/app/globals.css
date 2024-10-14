@@ -1,23 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.tinyFont {
+  font-family: 'Tiny5', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  @apply bg-zinc-950 text-white;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* --background: #0a0a0a;
+--foreground: #ededed; */
+/* body {
+  @apply min-h-screen min-w-full;
+} */
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+h1 {
+  @apply text-6xl;
 }
 
 @layer utilities {

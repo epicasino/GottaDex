@@ -1,14 +1,10 @@
-import { PrismaClient } from '@prisma/client';
-import pokedex from './json/pokedex.json';
+import prisma from '../../prisma/db';
+import pokedex from '../../prisma/json/pokedex.json';
 
-const prisma = new PrismaClient();
-
-async function seedData() {
-  console.log('Seeding...');
-
+export async function createAccount(username: string) {
   const userCreated = await prisma.user.create({
     data: {
-      username: 'Bob1',
+      username,
     },
   });
 
@@ -89,13 +85,9 @@ async function seedData() {
           });
         }
       }
-      console.log('Finished Seeding.');
+      return userCreated;
     } catch (error) {
       return console.error(error);
     }
   }
 }
-
-seedData().then(async () => {
-  await prisma.$disconnect();
-});
