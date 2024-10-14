@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// npx prisma db push
+// npx prisma db seed
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String    @id @default(cuid())
+  username String
+  progress Float     @default(0)
+  pokedex  Pokemon[]
+}
+
+model Pokemon {
+  id                        Int              @id
+  pokemonName               String
+  sprite                    String
+  femaleSprite              String?
+  shinySprite               String?
+  femaleShinySprite         String?
+  caught                    Boolean
+  femaleCaught              Boolean?
+  shinyCaught               Boolean?
+  femaleShinyCaught         Boolean?
+  perfectIV                 Boolean
+  femalePerfectIV           Boolean?
+  hiddenAbility             String?
+  hiddenAbilityCaught       Boolean?
+  femaleHiddenAbilityCaught Boolean?
+  nature                    String?
+  genderDifference          Boolean
+  notes                     String?
+  pokemonLocation           PokemonLocation?
+  forms                     PokemonForm[]
+  evSpread                  EvSpread?
+  userId                    String
+  user                      User?            @relation(fields: [userId], references: [id])
+}
+
+model PokemonLocation {
+  id                Int     @id @default(autoincrement())
+  swordShield       Boolean
+  swordShieldIsle   Boolean
+  swordShieldCrown  Boolean
+  diamondPearl      Boolean
+  arceus            Boolean
+  scarletViolet     Boolean
+  scarletVioletKita Boolean
+  scarletVioletBlue Boolean
+  pokemonId         Int     @unique
+  pokemon           Pokemon @relation(fields: [pokemonId], references: [id])
+}
+
+model PokemonForm {
+  id                  Int      @id @default(autoincrement())
+  formName            String
+  sprite              String
+  caught              Boolean?
+  shinySprite         String?
+  shinyCaught         Boolean?
+  perfectIV           Boolean
+  hiddenAbility       String?
+  hiddenAbilityCaught Boolean?
+  pokemonId           Int
+  pokemon             Pokemon  @relation(fields: [pokemonId], references: [id])
+}
+
+model EvSpread {
+  id        Int     @id @default(autoincrement())
+  hp        Int     @default(0)
+  attack    Int     @default(0)
+  defense   Int     @default(0)
+  spAtk     Int     @default(0)
+  spDef     Int     @default(0)
+  speed     Int     @default(0)
+  pokemonId Int     @unique
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+}
