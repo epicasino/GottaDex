@@ -1,22 +1,19 @@
-import Image from 'next/image';
-import Link from 'next/link';
+'use client';
 
-export default async function Home() {
+import LoadingLogo from '@/components/LoadingLogo';
+// import prisma from '../../prisma/db';
+import { findUser } from '@/db/findUser';
+
+export default function Home() {
+  setTimeout(async () => {
+    const user = await findUser();
+    return user !== null
+      ? window.location.replace('/dashboard')
+      : window.location.replace('/createAccount');
+  }, 5000);
   return (
     <main className="flex justify-center items-center min-h-screen min-w-full">
-      <Link
-        className="flex flex-row items-center gap-2 animate-appear transition hover:scale-125"
-        href={'/createAccount'}
-      >
-        <Image
-          src={'/svg/pokeball.svg'}
-          height={0}
-          width={0}
-          className="h-10 w-auto animate-spin-once"
-          alt="Pokeball"
-        />
-        <h1 className="tinyFont">GottaDex</h1>
-      </Link>
+      <LoadingLogo />
     </main>
   );
 }

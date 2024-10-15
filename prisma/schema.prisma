@@ -43,7 +43,7 @@ model Pokemon {
   forms                     PokemonForm[]
   evSpread                  EvSpread?
   userId                    String
-  user                      User?            @relation(fields: [userId], references: [id])
+  user                      User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model PokemonLocation {
@@ -57,7 +57,7 @@ model PokemonLocation {
   scarletVioletKita Boolean
   scarletVioletBlue Boolean
   pokemonId         Int     @unique
-  pokemon           Pokemon @relation(fields: [pokemonId], references: [id])
+  pokemon           Pokemon @relation(fields: [pokemonId], references: [id], onDelete: Cascade)
 }
 
 model PokemonForm {
@@ -71,7 +71,7 @@ model PokemonForm {
   hiddenAbility       String?
   hiddenAbilityCaught Boolean?
   pokemonId           Int
-  pokemon             Pokemon  @relation(fields: [pokemonId], references: [id])
+  pokemon             Pokemon  @relation(fields: [pokemonId], references: [id], onDelete: Cascade)
 }
 
 model EvSpread {
@@ -83,5 +83,5 @@ model EvSpread {
   spDef     Int     @default(0)
   speed     Int     @default(0)
   pokemonId Int     @unique
-  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id], onDelete: Cascade)
 }
