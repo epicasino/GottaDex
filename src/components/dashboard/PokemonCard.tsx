@@ -1,5 +1,4 @@
 import { iPokemon } from '@/types/types';
-import { Prisma } from '@prisma/client';
 import React from 'react';
 
 export default function PokemonCard({ pokemon }: { pokemon: iPokemon }) {
