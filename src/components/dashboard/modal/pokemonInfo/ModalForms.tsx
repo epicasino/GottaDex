@@ -56,7 +56,7 @@ function PokemonForm({ pokemonForm }: { pokemonForm: iPokemonForm }) {
         <input
           type="checkbox"
           name={`${pokemonForm.id}-perfectiv`}
-          checked={pokemonForm.perfectIV}
+          defaultChecked={pokemonForm.perfectIV}
         />
       </label>
       {pokemonForm.hiddenAbility && (
@@ -67,7 +67,7 @@ function PokemonForm({ pokemonForm }: { pokemonForm: iPokemonForm }) {
             <input
               type="checkbox"
               name={`${pokemonForm.id}-hiddenabilitycaught`}
-              checked={pokemonForm!.hiddenAbilityCaught!}
+              defaultChecked={pokemonForm!.hiddenAbilityCaught!}
             />
           </label>
         </>
@@ -78,7 +78,7 @@ function PokemonForm({ pokemonForm }: { pokemonForm: iPokemonForm }) {
           <input
             type="checkbox"
             name={`${pokemonForm.id}-shinycaught`}
-            checked={pokemonForm!.shinyCaught!}
+            defaultChecked={pokemonForm!.shinyCaught!}
           />
         </label>
       )}

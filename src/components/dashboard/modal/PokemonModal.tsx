@@ -44,13 +44,26 @@ export default async function PokemonModal({
             <h2 className="text-2xl md:text-4xl pb-4">#{pokemon.id}</h2>
           </header>
           <section>
-            <input type="hidden" name="pokemon-id" value={pokemon.id} />
             {/* pokemon's sprite(s) */}
             <ModalSprites pokemon={pokemon} />
             {/* hidden ability */}
             <ModalHidden pokemon={pokemon} />
           </section>
           <form className="flex flex-col" action={submitModalForm}>
+            <input
+              type="hidden"
+              name="pokemon"
+              value={JSON.stringify(pokemon)}
+            />
+            <input
+              type="hidden"
+              name="pokemon-forms-id"
+              value={JSON.stringify(
+                pokemon.forms.map((form) => {
+                  return { id: form.id };
+                })
+              )}
+            />
             {/* nature Dropdown */}
             <ModalNature pokemonNature={pokemon.nature} />
             {/* notes Dropdown */}
