@@ -1,4 +1,8 @@
-export interface User {
+export interface SearchParamProps {
+  searchParams: Record<string, string> | null | undefined;
+}
+
+export interface iUser {
   id: string;
   username: string;
   progress: number;
@@ -28,7 +32,7 @@ export interface iPokemon {
   forms: iPokemonForm[];
   evSpread?: iEvSpread | null;
   userId: string;
-  user?: User | null;
+  user?: iUser | null;
 }
 
 export interface iPokemonLocation {

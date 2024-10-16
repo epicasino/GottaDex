@@ -4,6 +4,10 @@
   "main": "build/main.js",
   "repository": "git@github.com:epicasino/GottaDex.git",
   "license": "MIT",
+  "author": {
+    "name": "epicasino"
+  },
+  "description": "A simple national pokedex tracker.",
   "scripts": {
     "next:dev": "next dev",
     "next:build": "next build",
@@ -19,7 +23,10 @@
     "dev": "npm-run-all --parallel electron:dev next:dev",
     "electron:build_watch": "tsup --watch",
     "electron:dev": "npm-run-all --parallel electron:build_watch electron:watch",
-    "electron:watch": "cross-env NODE_ENV='development' nodemon"
+    "electron:watch": "cross-env NODE_ENV='development' nodemon",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "build": {
     "asar": true,
@@ -65,6 +72,7 @@
   "dependencies": {
     "@electron-toolkit/utils": "^3.0.0",
     "@prisma/client": "^5.20.0",
+    "electron-unhandled": "^5.0.0",
     "get-port-please": "^3.1.2",
     "next": "14.2.15",
     "react": "^18",
@@ -76,7 +84,6 @@
     "@types/react-dom": "^18",
     "cross-env": "^7.0.3",
     "electron": "^32.2.0",
-    "electron-builder": "^25.1.8",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "nodemon": "^3.1.7",

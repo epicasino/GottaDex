@@ -4,6 +4,10 @@ import { getPort } from 'get-port-please';
 import { startServer } from 'next/dist/server/lib/start-server';
 import { join } from 'path';
 
+// import unhandled from 'electron-unhandled';
+
+// unhandled({ showDialog: true });
+
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 900,

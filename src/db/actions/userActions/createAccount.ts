@@ -1,5 +1,5 @@
-import prisma from '../../prisma/db';
-import pokedex from '../../prisma/json/pokedex.json';
+import prisma from '@/../prisma/db';
+import pokedex from '@/db/json/pokedex.json';
 
 export async function createAccount(username: string) {
   const userCreated = await prisma.user.create({

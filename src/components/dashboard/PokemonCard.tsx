@@ -1,24 +1,35 @@
+'use client';
 import { iPokemon } from '@/types/types';
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 export default function PokemonCard({ pokemon }: { pokemon: iPokemon }) {
   return (
-    <article
+    <Link
       className={`relative w-20 h-24 md:w-48 md:h-48 flex flex-col items-center justify-center rounded-md transition ${colorText(
         pokemon
       )}`}
+      href={`/dashboard/?showModal=true&pokemonId=${pokemon.id}`}
     >
       <h5 className={`tinyFont text-zinc-50 text-sm md:text-base`}>
         {/* capitalizes first letter */}
         {pokemon.pokemonName.charAt(0).toLocaleUpperCase() +
           pokemon.pokemonName.replace(/-/g, ' ').slice(1)}
       </h5>
-      <img src={pokemonCardImg(pokemon) || ''} className="h-3/5" />
+      <Image
+        src={pokemonCardImg(pokemon) || ''}
+        className="w-auto h-3/5"
+        height={0}
+        width={0}
+        alt={`${pokemon.pokemonName} sprite`}
+        unoptimized
+      />
       <p className="tinyFont text-zinc-50 text-sm md:text-base">
         #{pokemon.id}
       </p>
       <input type="checkbox" className="absolute top-2 left-2 multi-select" />
-    </article>
+    </Link>
   );
 }
 

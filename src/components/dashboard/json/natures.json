@@ -1,0 +1,102 @@
+[
+  {
+    "natureName": "Adamant",
+    "natureValue": "+atk, -spAtk"
+  },
+  {
+    "natureName": "Bashful",
+    "natureValue": "--"
+  },
+  {
+    "natureName": "Bold",
+    "natureValue": "+def, -atk"
+  },
+  {
+    "natureName": "Brave",
+    "natureValue": "+atk, -speed"
+  },
+  {
+    "natureName": "Calm",
+    "natureValue": "+spDef, -atk"
+  },
+  {
+    "natureName": "Careful",
+    "natureValue": "+spDef, -spAtk"
+  },
+  {
+    "natureName": "Docile",
+    "natureValue": "--"
+  },
+  {
+    "natureName": "Gentle",
+    "natureValue": "+spDef, -def"
+  },
+  {
+    "natureName": "Hardy",
+    "natureValue": "--"
+  },
+  {
+    "natureName": "Hasty",
+    "natureValue": "+speed, -def"
+  },
+  {
+    "natureName": "Impish",
+    "natureValue": "+def, -spAtk"
+  },
+  {
+    "natureName": "Jolly",
+    "natureValue": "+speed, -spAtk"
+  },
+  {
+    "natureName": "Lax",
+    "natureValue": "+def, -spDef"
+  },
+  {
+    "natureName": "Lonely",
+    "natureValue": "+atk, -def"
+  },
+  {
+    "natureName": "Mild",
+    "natureValue": "+spAtk, -def"
+  },
+  {
+    "natureName": "Modest",
+    "natureValue": "+spAtk, -atk"
+  },
+  {
+    "natureName": "Naive",
+    "natureValue": "+speed, -spDef"
+  },
+  {
+    "natureName": "Naughty",
+    "natureValue": "+atk, -spDef"
+  },
+  {
+    "natureName": "Quiet",
+    "natureValue": "+spAtk, -speed"
+  },
+  {
+    "natureName": "Quirky",
+    "natureValue": "--"
+  },
+  {
+    "natureName": "Rash",
+    "natureValue": "+spAtk, -spDef"
+  },
+  {
+    "natureName": "Relaxed",
+    "natureValue": "+def, -speed"
+  },
+  {
+    "natureName": "Sassy",
+    "natureValue": "+spDef, -speed"
+  },
+  {
+    "natureName": "Serious",
+    "natureValue": "--"
+  },
+  {
+    "natureName": "Timid",
+    "natureValue": "+speed, -atk"
+  }
+]
