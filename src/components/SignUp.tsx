@@ -1,6 +1,6 @@
 'use client';
 
-import { createUser } from '@/db/createUser';
+import { createUser } from '@/db/actions/userActions/createUser';
 import Image from 'next/image';
 import { useState } from 'react';
 

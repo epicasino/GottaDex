@@ -1,7 +1,5 @@
 'use client';
-
 import LoadingLogo from '@/components/LoadingLogo';
-// import prisma from '../../prisma/db';
 import { findUser } from '@/db/actions/userActions/findUser';
 
 export default function Home() {
