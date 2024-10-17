@@ -1,6 +1,8 @@
 'use server';
 
 import { iPokemon } from '@/types/types';
+import prisma from '@/../prisma/db';
+import { revalidatePath } from 'next/cache';
 
 interface iPokemonFormsForm {
   id: number;
@@ -15,8 +17,8 @@ export async function submitModalForm(formData: FormData) {
 
   const pokemonFormData = {
     id: formData.get('pokemon-id')!,
-    nature: formData.get('nature'),
-    notes: formData.get('notes'),
+    nature: formData.get('nature') as string,
+    notes: formData.get('notes') as string,
     caught: formData.get('caught') === 'on',
     hiddenAbilityCaught:
       pokemon.hiddenAbility !== null
@@ -40,14 +42,33 @@ export async function submitModalForm(formData: FormData) {
       ? formData.get('caught-female-shiny') === 'on'
       : null,
   };
+  // console.log(pokemonFormData);
 
   const pokemonEvFormData = {
-    hp: formData.get('ev-hp'),
-    attack: formData.get('ev-attack'),
-    defense: formData.get('ev-defense'),
-    spAtk: formData.get('ev-spAtk'),
-    spDef: formData.get('ev-spDef'),
-    speed: formData.get('ev-speed'),
+    hp:
+      formData.get('ev-hp') === null
+        ? 0
+        : parseInt(formData.get('ev-hp') as string),
+    attack:
+      formData.get('ev-attack') === null
+        ? 0
+        : parseInt(formData.get('ev-attack') as string),
+    defense:
+      formData.get('ev-defense') === null
+        ? 0
+        : parseInt(formData.get('ev-defense') as string),
+    spAtk:
+      formData.get('ev-spAtk') === null
+        ? 0
+        : parseInt(formData.get('ev-spAtk') as string),
+    spDef:
+      formData.get('ev-spDef') === null
+        ? 0
+        : parseInt(formData.get('ev-spDef') as string),
+    speed:
+      formData.get('ev-speed') === null
+        ? 0
+        : parseInt(formData.get('ev-speed') as string),
   };
 
   // console.log(pokemon);
@@ -68,5 +89,75 @@ export async function submitModalForm(formData: FormData) {
     };
   });
 
+  try {
+    const {
+      nature,
+      notes,
+      caught,
+      hiddenAbilityCaught,
+      perfectIV,
+      shinyCaught,
+      femaleCaught,
+      femaleHiddenAbilityCaught,
+      femalePerfectIV,
+      femaleShinyCaught,
+    } = pokemonFormData;
+    const updatedPokemon = await prisma.pokemon.update({
+      where: {
+        userId: pokemon.userId,
+        id: pokemon.id,
+      },
+      data: {
+        nature,
+        notes,
+        caught,
+        hiddenAbilityCaught,
+        perfectIV,
+        shinyCaught,
+        femaleCaught,
+        femaleHiddenAbilityCaught,
+        femalePerfectIV,
+        femaleShinyCaught,
+      },
+    });
+    // console.log(updatedPokemon);
+    const updatedPokemonForms =
+      pokemonForms.length > 0
+        ? pokemonForms.map(async (form) => {
+            const { caught, hiddenAbilityCaught, perfectIV, shinyCaught } =
+              form;
+            const updatedForm = prisma.pokemonForm.update({
+              where: { id: form.id },
+              data: {
+                caught,
+                hiddenAbilityCaught,
+                perfectIV: perfectIV as boolean,
+                shinyCaught,
+              },
+            });
+            return updatedForm;
+          })
+        : [];
+    // console.log(updatedPokemonForms);
+    const { hp, attack, defense, spAtk, spDef, speed } = pokemonEvFormData;
+    const updatedPokemonEv =
+      Object.values(pokemonEvFormData).reduce((a, b) => a + b) <= 510 &&
+      (await prisma.evSpread.update({
+        where: { id: pokemon.evSpread?.id },
+        data: { hp, attack, defense, spAtk, spDef, speed },
+      }));
+    // console.log(updatedPokemonEv);
+    if (updatedPokemon && updatedPokemonEv && updatedPokemonForms) {
+      revalidatePath(`/dashboard/?showModal=true&pokemonId=${pokemon.id}`);
+      // find some better way of doing this
+    } else if (!updatedPokemonEv) {
+      revalidatePath(`/dashboard/?showModal=true&pokemonId=${pokemon.id}`);
+    }
+    // return { updatedPokemon, updatedPokemonForms, updatedPokemonEv };
+  } catch (e) {
+    console.error(e);
+    // find some better way of doing this
+    return;
+  }
   // console.log(pokemonForms);
 }

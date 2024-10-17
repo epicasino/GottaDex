@@ -8,4 +8,4 @@ async function deleteRecords() {
 
 deleteRecords();
 
-// ts-node --compiler-options \"{\"module\":\"CommonJS\"}\" prisma/deleteAll.ts
+// ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/deleteAll.ts

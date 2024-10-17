@@ -15,14 +15,12 @@ import { submitModalForm } from '@/db/actions/pokemonActions/submitModalForm';
 export default async function PokemonModal({
   pokemonId,
 }: {
-  pokemonId?: string | null;
+  pokemonId?: string;
 }) {
   const pokemon = await prisma.pokemon.findFirst({
     where: { id: parseInt(pokemonId ? pokemonId : '') },
     include: { forms: true, evSpread: true, pokemonLocation: true },
   });
-
-  // console.log(pokemon);
 
   return (
     pokemon !== null && (
