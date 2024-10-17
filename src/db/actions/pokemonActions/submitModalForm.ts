@@ -150,6 +150,7 @@ export async function submitModalForm(formData: FormData) {
     if (updatedPokemon && updatedPokemonEv && updatedPokemonForms) {
       revalidatePath(`/dashboard/?showModal=true&pokemonId=${pokemon.id}`);
       // find some better way of doing this
+      return { message: 'Success!' };
     } else if (!updatedPokemonEv) {
       revalidatePath(`/dashboard/?showModal=true&pokemonId=${pokemon.id}`);
     }
@@ -157,7 +158,7 @@ export async function submitModalForm(formData: FormData) {
   } catch (e) {
     console.error(e);
     // find some better way of doing this
-    return;
+    return { error: e };
   }
   // console.log(pokemonForms);
 }
