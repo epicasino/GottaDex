@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from '../../../../prisma/db';
+import prisma from '../../../../../prisma/db';
 import PokemonModalForm from './PokemonModalForm';
 
 export default async function PokemonModal({
@@ -13,11 +13,7 @@ export default async function PokemonModal({
     include: { forms: true, evSpread: true, pokemonLocation: true },
   });
 
-  return (
-    pokemon !== null && (
-      <PokemonModalForm pokemon={pokemon} />
-    )
-  );
+  return pokemon !== null && <PokemonModalForm pokemon={pokemon} />;
 }
 
 // hp: Int;

@@ -1,5 +1,5 @@
 'use client';
-import LoadingLogo from '@/components/LoadingLogo';
+import LoadingLogo from '@/app/components/LoadingLogo';
 import { findUser } from '@/db/actions/userActions/findUser';
 
 export default function Home() {

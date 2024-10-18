@@ -2,7 +2,6 @@
 import { iPokemon } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 export default function PokemonCard({ pokemon }: { pokemon: iPokemon }) {
   return (
@@ -11,6 +10,7 @@ export default function PokemonCard({ pokemon }: { pokemon: iPokemon }) {
         pokemon
       )}`}
       href={`/dashboard/?showModal=true&pokemonId=${pokemon.id}`}
+      scroll={false}
     >
       <h5 className={`tinyFont text-zinc-50 text-sm md:text-base`}>
         {/* capitalizes first letter */}

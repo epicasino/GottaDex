@@ -12,7 +12,7 @@ interface iPokemonFormsForm {
   shinyCaught: boolean | null;
 }
 
-export async function submitModalForm(formData: FormData) {
+export async function updatePokemon(formData: FormData) {
   const pokemon: iPokemon = JSON.parse(formData.get('pokemon') as string);
 
   const pokemonFormData = {

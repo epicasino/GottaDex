@@ -10,6 +10,7 @@ export default function LoadingLogo() {
         width={0}
         className="h-10 w-auto animate-spin-once"
         alt="Pokeball"
+        unoptimized
       />
       <h1 className="tinyFont">GottaDex</h1>
     </header>
