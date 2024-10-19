@@ -8,5 +8,7 @@ export async function emptySearch() {
 
 export async function querySearch(formData: FormData) {
   const query = formData.get('query') as string | number;
-  redirect(`/dashboard?query=${query}`);
+  if (typeof query === 'string') {
+    redirect(`/dashboard?query=${query.trim().split(' ').join('-')}`);
+  } else redirect(`/dashboard?query=${query}`);
 }

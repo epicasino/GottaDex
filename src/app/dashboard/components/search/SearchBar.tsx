@@ -1,6 +1,6 @@
 'use client';
 
-import { emptySearch, querySearch } from './searchActions';
+import { emptySearch, querySearch } from './searchQueries';
 
 export default function SearchBar() {
   return (
